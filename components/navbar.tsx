@@ -20,8 +20,8 @@ const Navbar = () => {
         { name: "Industries", path: "/industries" },
         { name: "Catalogue", path: "/catalogue" },
         { name: "Contact", path: "/contact" },
+        {name: "Manufacturing", path: "/manufacturing-quality" }
     ];
-
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -73,7 +73,7 @@ const Navbar = () => {
                     {/* DESKTOP LINKS */}
                     <div className="hidden lg:flex flex-2 justify-center items-center gap-6 xl:gap-10 max-w-3xl mx-4">
                         {navLinks.map((link, i) => {
-                            if (link.name === "Products") {
+                            if (link.name === "Product") {
                                 return (
                                     <div
                                         key={i}
