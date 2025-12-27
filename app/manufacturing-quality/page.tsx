@@ -10,7 +10,7 @@ export default function ManufacturingQualityPage() {
                         backgroundImage: "url('/manufacturing.jpg')",
                     }}
                 >
-                    <div className="absolute inset-0 bg-black/80"></div>
+                    <div className="absolute inset-0 bg-black/60"></div>
 
                     <div className="relative max-w-7xl mx-auto px-6">
                         <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-normal">
