@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
-    const [achievementsTimeout, setAchievementsTimeout] = useState<NodeJS.Timeout | null>(null);
 
     const router = useRouter();
 
@@ -35,12 +33,6 @@ const Navbar = () => {
             document.body.style.overflow = "unset";
         };
     }, [isMenuOpen]);
-
-    useEffect(() => {
-        return () => {
-            if (achievementsTimeout) clearTimeout(achievementsTimeout);
-        };
-    }, [achievementsTimeout]);
 
     return (
         <>
@@ -78,14 +70,6 @@ const Navbar = () => {
                                     <div
                                         key={i}
                                         className="relative"
-                                        onMouseEnter={() => {
-                                            if (achievementsTimeout) clearTimeout(achievementsTimeout);
-                                            setIsAchievementsOpen(true);
-                                        }}
-                                        onMouseLeave={() => {
-                                            const timeout = setTimeout(() => setIsAchievementsOpen(false), 200);
-                                            setAchievementsTimeout(timeout);
-                                        }}
                                     >
                                         <button
                                             className={`group font-medium flex items-center gap-1
@@ -98,17 +82,7 @@ const Navbar = () => {
                           ${isScrolled ? "bg-gray-700" : "bg-white"}`}
                                                 />
                                             </span>
-                                            <svg className={`w-4 h-4 transition-transform ${isAchievementsOpen ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path d="M19 9l-7 7-7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </svg>
-                                        </button>
-
-                                        {isAchievementsOpen && (
-                                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white rounded-xl shadow-2xl border">
-                                                <Link href="/milestones" className="block px-6 py-3 text-gray-800 hover:bg-gray-50">Our Milestones</Link>
-                                                <Link href="/journey" className="block px-6 py-3 text-gray-800 hover:bg-gray-50 border-t">10+ Year’s Journey</Link>
-                                            </div>
-                                        )}
+                                        </button>                        
                                     </div>
                                 );
                             }
@@ -133,8 +107,8 @@ const Navbar = () => {
 
                     {/* BUTTON */}
                     <button
-                        onClick={() => router.push("/donate")}
-                        className={`hidden lg:block px-6 py-3 rounded-full font-semibold transition-all hover:scale-105
+                        onClick={() => router.push("/contact")}
+                        className={`hidden lg:block px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 cursor-pointer
             ${isScrolled ? "bg-yellow-500 hover:bg-yellow-600" : "bg-yellow-400 hover:bg-yellow-500"}`}
                     >
                         Request a Quote

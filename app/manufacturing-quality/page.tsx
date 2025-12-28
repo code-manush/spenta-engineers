@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manufacturing & Quality",
+  description:
+    "Explore Spenta Engineers’ manufacturing processes and quality assurance practices ensuring consistent performance and reliability.",
+};
+
 export default function ManufacturingQualityPage() {
     return (
         <section className="py-0 bg-white">

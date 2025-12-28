@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Industries We Serve",
+  description:
+    "Industries served by Spenta Engineers including mining, mineral exploration, geotechnical drilling, and infrastructure projects.",
+};
+
 export default function IndustriesPage() {
   return (
     <section className="py-0 bg-white">

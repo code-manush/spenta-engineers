@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Drill Rods",
+  description:
+    "High-strength drill rods manufactured for mineral exploration, mining, and geotechnical drilling applications.",
+};
+
 export default function DrillRodsPage() {
   return (
     <section className="py-0 bg-white">

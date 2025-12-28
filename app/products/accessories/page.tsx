@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Overshots & Drilling Accessories",
+  description:
+    "Drilling accessories including overshots, adapters, and core lifters supporting efficient drilling operations.",
+};
+
 export default function AccessoriesPage() {
   return (
     <section className="py-0 bg-white">

@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Plastic Core Trays & Boxes",
+  description:
+    "Durable plastic core trays and boxes designed for safe storage and transport of core samples.",
+};
+
 export default function PlasticCoreTraysPage() {
   return (
     <section className="py-0 bg-white">

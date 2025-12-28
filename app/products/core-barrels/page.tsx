@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Core Barrels",
+  description:
+    "Precision-engineered core barrels designed for efficient core recovery in mineral exploration and mining operations.",
+};
+
 export default function CoreBarrelsPage() {
   return (
     <section className="py-0 bg-white">

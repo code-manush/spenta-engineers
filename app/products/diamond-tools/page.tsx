@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Diamond & Tungsten Carbide Tools",
+  description:
+    "Diamond and tungsten carbide drilling tools engineered for efficient cutting and long service life.",
+};
+
 export default function DiamondToolsPage() {
   return (
     <section className="py-0 bg-white">
