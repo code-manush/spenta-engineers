@@ -101,9 +101,9 @@ export default function Footer() {
             </ul>
 
             <div className="space-y-2 text-gray-400 text-sm">
-              <p>📧 info@spentaengineers.com</p>
-              <p>📞 +91-XXXXXXXXXX</p>
-              <p>📍 [Company Address]</p>
+              <p>📧 spentaeng@gmail.com</p>
+              <p>📞 +91-9426753291</p>
+              <p>📍 Vadodara-390024, Gujarat, India</p>
             </div>
           </div>
 

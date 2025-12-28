@@ -1,13 +1,39 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description:
-    "Contact Spenta Engineers to discuss drilling tool specifications, manufacturing capabilities, and project requirements.",
-};
+// import type { Metadata } from "next";
+import { useFormState, useFormStatus } from "react-dom";
+import { sendContactForm } from "./action";
+import { useActionState } from "react";
+
+// export const metadata: Metadata = {
+//   title: "Contact Us",
+//   description:
+//     "Contact Spenta Engineers to discuss drilling tool specifications, manufacturing capabilities, and project requirements.",
+// };
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className={`w-full py-4 rounded-lg font-bold text-lg transition
+        ${pending
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-blue-900 text-white hover:bg-blue-800"}
+      `}
+    >
+      {pending ? "Sending..." : "Submit Enquiry"}
+    </button>
+  );
+}
 
 export default function ContactPage() {
+  const initialState = { success: false, error: null };
+  const [state, formAction] = useActionState(sendContactForm, initialState);
   return (
+
     <section className="bg-white">
 
       {/* HERO */}
@@ -51,19 +77,19 @@ export default function ContactPage() {
 
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Email</p>
-                <p>info@spentaengineers.com</p>
+                <p>spentaeng@gmail.com</p>
               </div>
 
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Phone</p>
-                <p>+91-XXXXXXXXXX</p>
+                <p>+91-9426753291</p>
               </div>
 
               <div>
                 <p className="font-semibold text-gray-900 mb-1">Address</p>
                 <p>
-                  [Company Address Line 1]<br />
-                  [City, State, Country]
+                  <br />
+                  Vadodara-390024, Gujarat, India
                 </p>
               </div>
 
@@ -83,10 +109,11 @@ export default function ContactPage() {
               Send Us a Message
             </h3>
 
-            <form className="space-y-6">
+            <form action={formAction} className="space-y-6">
 
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
                 className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 required
@@ -94,6 +121,7 @@ export default function ContactPage() {
 
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
                 className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 required
@@ -101,6 +129,7 @@ export default function ContactPage() {
 
               <input
                 type="text"
+                name="company"
                 placeholder="Company / Organization"
                 className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
@@ -108,16 +137,24 @@ export default function ContactPage() {
               <textarea
                 placeholder="Your Message / Requirement"
                 rows={5}
+                name="message"
                 className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 required
               />
 
-              <button
-                type="submit"
-                className="w-full bg-blue-900 text-white py-4 rounded-lg font-bold text-lg hover:bg-blue-800 transition"
-              >
-                Submit Enquiry
-              </button>
+              <SubmitButton />
+
+              {state.success && (
+                <p className="text-green-700 font-semibold text-center mt-4">
+                  ✅ Your message has been sent successfully. We’ll get back to you shortly.
+                </p>
+              )}
+
+              {state.error && (
+                <p className="text-red-600 font-semibold text-center mt-4">
+                  ❌ {state.error}
+                </p>
+              )}
 
             </form>
           </div>

@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   },
   description:
     "Spenta Engineers is a manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   keywords: [
     "drilling tools manufacturer",
     "drill rods",

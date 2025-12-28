@@ -10,12 +10,13 @@ export default function CTASection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <button className="bg-white text-blue-900 px-10 py-5 rounded-lg font-bold text-xl shadow-lg hover:shadow-xl transition-all">
-            Download Product Catalogue
-          </button>
-          <button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white px-10 py-5 rounded-lg font-bold text-xl transition-all">
-            Request a Quote
-          </button>
+          <a
+              href="/spenta-engineers-catalogue.pdf"
+              target="_blank"
+              className="inline-block bg-blue-900 text-white px-10 py-5 rounded-lg font-bold text-lg hover:bg-blue-800 transition tracking-wide text-center"
+            >
+              Download PDF
+            </a>
         </div>
       </div>
     </section>

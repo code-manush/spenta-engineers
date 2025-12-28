@@ -25,6 +25,11 @@ export default function ProductCategories() {
       description: "Essential accessories for drilling operations.",
       image: "/overshot.webp",
     },
+    {
+      name: "Drill Rigs",
+      description: "Robust and reliable drill rigs designed for mineral exploration, geotechnical, and water well drilling.",
+      image: "/drill-rig.jpg",
+    }
   ];
 
   return (

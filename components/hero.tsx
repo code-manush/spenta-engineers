@@ -21,7 +21,7 @@ export default function Hero() {
       headline: "Comprehensive Drilling Solutions",
       supporting:
         "Plastic core trays, drill rods, core barrels, diamond & tungsten carbide tools, and drilling accessories",
-      image: "/image1.png",
+      image: "/image1.webp",
     },
     {
       type: "image",
@@ -29,7 +29,7 @@ export default function Hero() {
       headline: "Built for Demanding Field Conditions",
       supporting:
         "Controlled manufacturing processes and field-tested designs ensuring reliability and consistent performance",
-      image: "/3.png",
+      image: "/1.webp",
     },
   ];
 
@@ -44,10 +44,7 @@ export default function Hero() {
   useEffect(() => {
     const slide = slides[currentSlide];
     if (slide.type === "video" && videoRef.current) {
-      videoRef.current.pause();
       videoRef.current.currentTime = 0;
-      videoRef.current.load();
-      videoRef.current.play().catch(() => {});
     }
   }, [currentSlide]);
 
@@ -56,9 +53,8 @@ export default function Hero() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
         >
           {slide.type === "video" && (
             <video
@@ -68,6 +64,8 @@ export default function Hero() {
               muted
               autoPlay
               playsInline
+              preload="metadata"
+              poster="hero-poster.jpg"
             />
           )}
 
