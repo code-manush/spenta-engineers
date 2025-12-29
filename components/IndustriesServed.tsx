@@ -11,12 +11,13 @@ export default function IndustriesServed() {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="mb-16 max-w-3xl">
-          <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+          <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-3">
             APPLICATIONS
           </p>
           <h2 className="text-5xl font-bold text-gray-900">
             INDUSTRIES WE SERVE
           </h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-black mt-4 rounded-full" />
           <p className="mt-4 text-gray-600">
             Our drilling tools are trusted across a wide range of industrial and
             exploration applications.

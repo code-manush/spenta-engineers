@@ -132,7 +132,7 @@ export default function Hero() {
                 {slide.headline.split(' ').map((word, i) => (
                   <span 
                     key={i}
-                    className="inline-block animate-fade-in-word"
+                    className="inline-block animate-fade-in-word mr-4"
                     style={{ animationDelay: `${i * 100}ms` }}
                   >
                     {word}{' '}

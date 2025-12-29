@@ -12,12 +12,13 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="mb-16 max-w-3xl">
-          <p className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+          <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-3">
             Our Strengths
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
             Why Choose Spenta Engineers
           </h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-black mt-4 rounded-full" />
           <p className="mt-4 text-lg text-gray-600">
             Our approach combines engineering expertise, controlled manufacturing,
             and a strong focus on reliability to support demanding drilling operations.

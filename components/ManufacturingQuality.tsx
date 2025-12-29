@@ -4,7 +4,7 @@ export default function ManufacturingQuality() {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="mb-16 max-w-3xl">
-          <p className="text-sm uppercase tracking-widest text-gray-500 mb-7">
+          <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-3">
             Manufacturing & Quality
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
@@ -13,6 +13,7 @@ export default function ManufacturingQuality() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
             Tested for Reliability.
           </h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-black mt-4 rounded-full" />
           <p className="mt-6 text-lg text-gray-600">
             Our manufacturing processes and quality practices are focused on delivering
             drilling tools that perform consistently in demanding field conditions.
