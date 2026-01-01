@@ -32,9 +32,9 @@ export default function DrillRodsPage() {
                             Products
                         </span>
                     </div>
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6">Drill Rigs</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6">Overshot</h1>
                     <p className="max-w-3xl text-gray-300 text-xl leading-relaxed">
-                        Drilling rigs provide the rotational power, feed force, and control required to perform mineral exploration and geotechnical drilling operations efficiently and safely.
+                        Overshots are wireline retrieval tools used to latch onto and recover the inner tube assembly from the core barrel without dismantling the drill rod string.
                     </p>
                 </div>
             </section>
@@ -86,10 +86,10 @@ export default function DrillRodsPage() {
                         </span>
                     </div>
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                        Role in the Drilling Operation
+                        Role in the Core Drilling System
                     </h2>
                     <p className="max-w-4xl text-lg text-gray-700 leading-relaxed">
-                        Drilling rigs serve as the primary power and control units in drilling operations. They provide rotation, feed force, and hydraulic or mechanical control to the drill string and downhole tools. Proper rig selection is critical to ensure drilling efficiency, operational safety, and compatibility with the selected core drilling system.
+                        The overshot plays a critical role in wireline core drilling operations. It is lowered through the drill rod string using a wireline cable to engage with the head assembly and retrieve the inner tube assembly. This enables rapid core recovery without removing drill rods, significantly improving drilling efficiency and reducing downtime.
                     </p>
                 </section>
 
@@ -105,54 +105,25 @@ export default function DrillRodsPage() {
                         Product Description
                     </h2>
                     <p className="text-lg text-gray-700 leading-relaxed">
-                        Spenta Engineers manufactures drilling rigs designed for reliable performance in mineral exploration and geotechnical drilling applications. These rigs are engineered to operate with standard core drilling systems and are available in configurations suitable for a wide range of drilling depths, ground conditions, and site environments.
+                        Spenta Engineers manufactures overshots designed for reliable engagement, smooth retrieval, and long service life in demanding drilling conditions. Each overshot is engineered for precise interaction with compatible head assemblies and wireline systems, ensuring consistent performance during repeated retrieval cycles.
                     </p>
                 </section>
 
-                {/* TYPES */}
+                {/* Sizes & Manufacturing */}
                 <section className="mb-20">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="h-px w-8 bg-blue-600" />
                         <span className="text-sm uppercase tracking-widest text-blue-600 font-semibold">
-                            Variants
+                            Manufacturing
                         </span>
                     </div>
                     <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                        Types of Drilling Rigs
-                    </h2>
-                    <ul className="space-y-4 text-gray-700 text-lg leading-relaxed max-w-4xl">
-                        <li>
-                            <strong>Portable Drilling Rigs:</strong> Compact rigs designed
-                            for ease of transportation and rapid setup, suitable for remote
-                            locations and confined work sites.
-                        </li>
-                        <li>
-                            <strong>Crawler Mounted Drilling Rigs:</strong> Heavy-duty rigs
-                            mounted on crawler tracks, offering enhanced stability and
-                            mobility on uneven terrain.
-                        </li>
-                    </ul>
-                </section>
-
-                {/* Capacity and Configuration */}
-                <section className="mb-20">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="h-px w-8 bg-blue-600" />
-                        <span className="text-sm uppercase tracking-widest text-blue-600 font-semibold">
-                            Details
-                        </span>
-                    </div>
-                    <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                        Capacity and Configuration
+                        Standard Sizes, Lengths & Manufacturing
                     </h2>
 
                     <div className="max-w-4xl space-y-6 text-lg text-gray-700">
                         <p className="leading-relaxed">
-                            Drilling rigs are available in multiple configurations depending on
-              drilling depth, formation conditions, site accessibility, and power
-              requirements. Typical configuration parameters include drilling
-              depth capacity, torque and rotation speed, feed force, power
-              source, and mounting type.
+                            Overshots are manufactured in standard sizes including AQ, BQ, NQ, HQ, and PQ. Components are produced from high-strength alloy steel with precision machining to ensure accurate latching and release mechanisms. Controlled heat treatment enhances durability and resistance to wear during continuous use.
                         </p>
                     </div>
                 </section>
@@ -173,13 +144,12 @@ export default function DrillRodsPage() {
                         <table className="w-full">
                             <tbody className="text-lg">
                                 {[
-                                    { label: "Available Types", value: "Portable rigs, Crawler-mounted rigs" },
-                                    { label: "Power Source", value: "Diesel/Electric" },
-                                    { label: "Control System", value: "Hydraulic / Mechanical" },
-                                    { label: "Mounting Options", value: "Skid-mounted, Portable, Crawler" },
-                                    { label: "Compatibility", value: "Standard core drilling systems" },
-                                    { label: "Typical Operating Environment", value: "Remote sites, uneven terrain" },
-                                    { label: "Application", value: "Mineral exploration & geotechnical drilling" }
+                                    { label: "Available Sizes", value: "AQ, BQ, NQ, HQ, PQ" },
+                                    { label: "Operating Method", value: "Wireline retrieval" },
+                                    { label: "Engagement Type", value: "Mechanical latching mechanism" },
+                                    { label: "Material", value: "High-strength alloy steel" },
+                                    { label: "Heat Treatment", value: "Controlled heat treatment" },
+                                    { label: "Typical Application", value: "Wireline core drilling systems" }
                                 ].map((row, idx) => (
                                     <tr key={idx} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                                         <td className="py-5 px-6 font-semibold text-gray-900 bg-gray-50">
@@ -210,9 +180,9 @@ export default function DrillRodsPage() {
                         </div>
                         <ul className="space-y-4">
                             {[
-                                "Select rig type based on site accessibility and terrain",
-                                "Match rig capacity to required drilling depth and formation conditions",
-                                "Ensure compatibility with selected core drilling system components"
+                                "Select size based on corresponding head assembly and core barrel size",
+                                "Ensure compatibility with wireline cable and winch system",
+                                "Consider drilling depth and retrieval frequency for optimal performance"
                             ].map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-3 text-gray-700">
                                     <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,10 +206,10 @@ export default function DrillRodsPage() {
                         </div>
                         <ul className="space-y-4">
                             {[
-                                "Designed for reliable and continuous drilling operations",
-                                "Compatible with standard core drilling systems",
-                                "Configurable for different site and drilling requirements",
-                                "Robust construction for demanding field conditions"
+                                "Enables fast core retrieval without removing drill rods",
+                                "Reliable latching and release mechanism",
+                                "Precision-machined for smooth wireline operation",
+                                "Designed for repeated use in demanding drilling environments"
                             ].map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-3 text-gray-700">
                                     <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,7 +233,7 @@ export default function DrillRodsPage() {
                         </h3>
                     </div>
                     <p className="max-w-4xl text-lg text-gray-700 leading-relaxed">
-                        Drilling rigs must be compatible with the selected core drilling system, including drill rods, core barrels, and wireline components. All drilling rigs supplied by Spenta Engineers are designed to operate seamlessly with industry-standard core drilling equipment.
+                        Overshots must be compatible with the selected head assembly, core barrel, and wireline system. All overshots supplied by Spenta Engineers are designed to integrate seamlessly with standard wireline core drilling system components of corresponding sizes.
                     </p>
                 </section>
 
@@ -272,10 +242,10 @@ export default function DrillRodsPage() {
                     <div className="flex flex-col md:flex-row justify-between items-center gap-8">
                         <div>
                             <h3 className="text-3xl font-bold mb-2">
-                                Request a Quote for Drilling Rigs
+                                Request a Quote for Overshot
                             </h3>
                             <p className="text-gray-300 text-lg">
-                                Share your drilling requirements and system configuration, and our technical team will assist you in selecting the appropriate drilling rig for your application.
+                                Share your drilling requirements and system configuration, and our technical team will assist you in selecting the appropriate head assembly for your application.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-4">
