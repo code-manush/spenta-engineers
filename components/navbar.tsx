@@ -9,6 +9,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
+    const [showProductsDropdown, setShowProductsDropdown] = useState(false);
 
     const router = useRouter();
     const pathname = usePathname();
@@ -44,9 +45,9 @@ const Navbar = () => {
                     flex items-center justify-between gap-2 lg:gap-3
                     transition-all duration-500 ease-out
                     ${isScrolled
-                        ? "bg-white/80 backdrop-blur-2xl shadow-2xl py-0 lg:py-0 border border-white/20"
-                        : "bg-black/20 backdrop-blur-md py-0 lg:py-0 shadow-lg border border-white/10"
-                    }`}
+                            ? "bg-white/80 backdrop-blur-2xl shadow-2xl py-0 lg:py-0 border border-white/20"
+                            : "bg-black/20 backdrop-blur-md py-0 lg:py-0 shadow-lg border border-white/10"
+                        }`}
                 >
                     {/* LOGO */}
                     <Link href="/" className="flex items-center shrink-0 transition-transform duration-300 hover:scale-105">
@@ -63,27 +64,106 @@ const Navbar = () => {
                     </Link>
 
                     {/* DESKTOP LINKS */}
-                    <div className="hidden lg:flex flex-2 justify-center items-center gap-6 xl:gap-10 max-w-3xl mx-4">
-                        {navLinks.map((link, i) => (
-                            <Link
-                                key={i}
-                                href={link.path}
-                                className={`group font-medium relative transition-colors duration-300
-                                    ${pathname === link.path 
-                                        ? (isScrolled ? "text-blue-600" : "text-blue-300")
-                                        : (isScrolled ? "text-gray-800 hover:text-blue-600" : "text-white hover:text-blue-300")
-                                    }`}
-                            >
-                                <span className="relative inline-block pb-1">
-                                    {link.name}
-                                    <span
-                                        className={`absolute left-0 bottom-0 h-0.5 w-full transition-all duration-300
-                                        ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}
-                                        ${isScrolled ? "bg-blue-600" : "bg-white"}`}
-                                    />
-                                </span>
-                            </Link>
-                        ))}
+                    <div className="hidden lg:flex items-center gap-8">
+                        {navLinks.map((link, i) => {
+                            if (link.name === "Products") {
+                                return (
+                                    <div
+                                        key={i}
+                                        className="relative"
+                                        onMouseEnter={() => setShowProductsDropdown(true)}
+                                        onMouseLeave={() => setShowProductsDropdown(false)}
+                                    >
+                                        <Link
+                                            href={link.path}
+                                            className={`relative font-medium transition-colors duration-300 flex items-center gap-1
+                            ${pathname === link.path
+                                                    ? (isScrolled ? "text-blue-600" : "text-white")
+                                                    : (isScrolled ? "text-gray-700 hover:text-blue-600" : "text-white/90 hover:text-white")
+                                                }`}
+                                        >
+                                            <span className="relative">
+                                                {link.name}
+                                                <span
+                                                    className={`absolute left-0 -bottom-1 h-px w-full transition-all duration-300
+                                ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}
+                                ${isScrolled ? "bg-blue-600" : "bg-white"}`}
+                                                />
+                                            </span>
+                                            <svg
+                                                className={`w-4 h-4 transition-transform duration-300 ${showProductsDropdown ? 'rotate-180' : ''}`}
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </Link>
+
+                                        {/* Dropdown */}
+                                        <div
+                                            className={`absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 shadow-2xl overflow-hidden transition-all duration-300 ${showProductsDropdown
+                                                    ? 'opacity-100 visible translate-y-0'
+                                                    : 'opacity-0 invisible -translate-y-2'
+                                                }`}
+                                        >
+                                            <div className="py-2">
+                                                <a
+                                                    href="/products/core-drilling-system"
+                                                    className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors group"
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                                                        </svg>
+                                                        <div>
+                                                            <div className="font-medium">Core Drilling System</div>
+                                                            <div className="text-xs text-gray-500">Integrated drilling solutions</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div className="h-px bg-gray-200 mx-4" />
+                                                <a
+                                                    href="/products/drill-rigs"
+                                                    className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors group"
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <svg className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                        </svg>
+                                                        <div>
+                                                            <div className="font-medium">Drilling Rigs</div>
+                                                            <div className="text-xs text-gray-500">Complete drilling equipment</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            }
+
+                            return (
+                                <Link
+                                    key={i}
+                                    href={link.path}
+                                    className={`relative font-medium transition-colors duration-300
+                    ${pathname === link.path
+                                            ? (isScrolled ? "text-blue-600" : "text-white")
+                                            : (isScrolled ? "text-gray-700 hover:text-blue-600" : "text-white/90 hover:text-white")
+                                        }`}
+                                >
+                                    <span className="relative">
+                                        {link.name}
+                                        <span
+                                            className={`absolute left-0 -bottom-1 h-px w-full transition-all duration-300
+                        ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}
+                        ${isScrolled ? "bg-blue-600" : "bg-white"}`}
+                                        />
+                                    </span>
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     {/* SEARCH BUTTON */}
@@ -108,8 +188,8 @@ const Navbar = () => {
                     </button>
 
                     {/* MOBILE TOGGLE */}
-                    <button 
-                        onClick={() => setIsMenuOpen(true)} 
+                    <button
+                        onClick={() => setIsMenuOpen(true)}
                         className={`lg:hidden p-2 rounded-lg transition-all hover:scale-110
                             ${isScrolled ? "hover:bg-gray-100" : "hover:bg-white/20"}`}
                     >
@@ -128,12 +208,12 @@ const Navbar = () => {
                             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 placeholder="Search products, industries..."
                                 className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-400"
                             />
-                            <button 
+                            <button
                                 onClick={() => setShowSearch(false)}
                                 className="text-gray-400 hover:text-gray-600"
                             >
