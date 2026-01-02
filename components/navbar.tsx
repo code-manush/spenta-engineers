@@ -21,7 +21,6 @@ const Navbar = () => {
         { name: "Industries", path: "/industries" },
         { name: "Catalogue", path: "/catalogue" },
         { name: "Contact", path: "/contact" },
-        { name: "Manufacturing", path: "/manufacturing-quality" }
     ];
 
     useEffect(() => {

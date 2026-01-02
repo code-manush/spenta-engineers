@@ -22,7 +22,7 @@ export default function Hero() {
       headline: "Comprehensive Drilling Solutions",
       supporting:
         "Plastic core trays, drill rods, core barrels, diamond & tungsten carbide tools, and drilling accessories",
-      image: "/image1.webp",
+      image: "/2.png",
     },
     {
       type: "image",

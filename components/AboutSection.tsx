@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [counters, setCounters] = useState({ years: 0, projects: 0, clients: 0 });
+  const [counters, setCounters] = useState({ years: 0, clients: 0 });
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function AboutSection() {
       const steps = 60;
       const interval = duration / steps;
       
-      const targets = { years: 15, projects: 500, clients: 100 };
+      const targets = { years: 20, clients: 100 };
       let step = 0;
 
       const timer = setInterval(() => {
@@ -39,7 +39,6 @@ export default function AboutSection() {
         
         setCounters({
           years: Math.floor(targets.years * progress),
-          projects: Math.floor(targets.projects * progress),
           clients: Math.floor(targets.clients * progress)
         });
 
@@ -173,7 +172,6 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {[
             { value: counters.years, label: "Years Experience", suffix: "+" },
-            { value: counters.projects, label: "Projects Completed", suffix: "+" },
             { value: counters.clients, label: "Quality Assurance", suffix: "%" }
           ].map((stat, index) => (
             <div 

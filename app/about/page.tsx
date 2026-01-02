@@ -92,7 +92,7 @@ export default function AboutPage() {
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-gray-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <img
-                            src="/about-detail.jpg"
+                            src="/about-hero.jpg"
                             alt="Manufacturing Facility"
                             className="relative w-full h-[480px] object-cover rounded-sm shadow-2xl border border-gray-200 transition-transform duration-500 group-hover:scale-[1.02]"
                         />

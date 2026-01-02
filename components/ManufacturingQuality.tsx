@@ -109,7 +109,7 @@ export default function ManufacturingQuality() {
               
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200">
                 <img
-                  src="/manufacturing-quality.jpeg"
+                  src="/manufacturing-quality.jpg"
                   alt="Manufacturing and Quality Control"
                   className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
@@ -196,19 +196,6 @@ export default function ManufacturingQuality() {
                 )}
               </div>
             ))}
-
-            {/* CTA Button */}
-            <div className="pt-4">
-              <a
-                href="/manufacturing-quality"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-gray-900 hover:from-blue-700 hover:to-black text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-105 group"
-              >
-                Learn More About Our Process
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
 
@@ -221,7 +208,7 @@ export default function ManufacturingQuality() {
         >
           {[
             { label: "Quality Control Points", value: "50+", icon: "✓" },
-            { label: "Years of Experience", value: "15+", icon: "⏱" },
+            { label: "Years of Experience", value: "20+", icon: "⏱" },
             { label: "Manufacturing Precision", value: "±0.01mm", icon: "📏" },
             { label: "Customer Satisfaction", value: "100%", icon: "⭐" }
           ].map((stat, index) => (
