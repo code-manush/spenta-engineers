@@ -3,7 +3,7 @@ export default function CoreDrillingSystemPage() {
     <main className="bg-white">
 
       {/* Hero */}
-      <section className="relative py-50 bg-gray-900 text-white overflow-hidden">
+      <section className="relative py-50 bg-gray-900 text-white overflow-hidden" style={{ backgroundImage: "url('/products/core-drilling-system-cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {/* Grid overlay */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -247,15 +247,6 @@ export default function CoreDrillingSystemPage() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-sm font-bold hover:bg-gray-100 transition-all"
               >
                 <span>Contact Technical Team</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <a
-                href="/products"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 rounded-sm font-bold hover:bg-white/10 transition-all"
-              >
-                <span>View All Products</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

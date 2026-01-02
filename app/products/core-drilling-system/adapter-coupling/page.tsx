@@ -4,12 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function DrillRodsPage() {
-    const [activeImage, setActiveImage] = useState(0);
-
-    const images = [
-        { src: "/head-assembly.jpg", alt: "DCDMA drill rods" },
-        { src: "/products/drill-rods/drill-rod-thread.jpg", alt: "Drill rod threaded connection" }
-    ];
 
     return (
         <main className="bg-white">
@@ -45,33 +39,13 @@ export default function DrillRodsPage() {
                     {/* Main Image */}
                     <div className="relative h-[400px] bg-gray-100 rounded-sm overflow-hidden shadow-2xl border-2 border-gray-200 mb-6">
                         <Image
-                            src={images[activeImage].src}
-                            alt={images[activeImage].alt}
+                            src="/products/8.png"
+                            alt="Adapter Coupling"
                             fill
                             className="object-cover"
                         />
                     </div>
 
-                    {/* Thumbnail Navigation */}
-                    <div className="grid grid-cols-2 gap-4 max-w-2xl">
-                        {images.map((img, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => setActiveImage(idx)}
-                                className={`relative h-32 bg-gray-100 rounded-sm overflow-hidden transition-all ${activeImage === idx
-                                        ? 'ring-4 ring-blue-600 scale-105'
-                                        : 'opacity-60 hover:opacity-100'
-                                    }`}
-                            >
-                                <Image
-                                    src={img.src}
-                                    alt={img.alt}
-                                    fill
-                                    className="object-cover"
-                                />
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </section>
 
@@ -259,7 +233,7 @@ export default function DrillRodsPage() {
                                 </svg>
                             </a>
                             <a
-                                href="https://wa.me/919426753291?text=I%20am%20interested%20in%20Drill%20Rods"
+                                href="https://wa.me/919426753291?text=I%20am%20interested%20in%20the%20Adapter%20Coupling%20product.%20Please%20provide%20more%20information."
                                 target="_blank"
                                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 text-white rounded-sm font-bold hover:bg-green-700 transition-all"
                             >

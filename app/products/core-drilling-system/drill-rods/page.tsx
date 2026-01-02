@@ -7,8 +7,8 @@ export default function DrillRodsPage() {
     const [activeImage, setActiveImage] = useState(0);
 
     const images = [
-        { src: "/dcdma-drill-rod.avif", alt: "DCDMA drill rods" },
-        { src: "/products/drill-rods/drill-rod-thread.jpg", alt: "Drill rod threaded connection" }
+        { src: "/products/2.png", alt: "DCDMA drill rods" },
+        { src: "/products/3.png", alt: "Drill rod threaded connection" }
     ];
 
     return (

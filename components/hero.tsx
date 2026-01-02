@@ -153,11 +153,8 @@ export default function Hero() {
                 }`}
                 style={{ transitionDelay: '800ms' }}
               >
-                <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50">
+                <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50" onClick={() => window.location.href = '/products/core-trays'}>
                   Explore Products
-                </button>
-                <button className="border-2 border-white/30 backdrop-blur-sm px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all hover:scale-105">
-                  Learn More
                 </button>
               </div>
             </div>

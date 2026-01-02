@@ -1,5 +1,6 @@
 "use client";
 
+import { link } from "fs";
 import { useState } from "react";
 
 export default function ProductCategories() {
@@ -9,32 +10,26 @@ export default function ProductCategories() {
     {
       name: "Plastic Core Trays & Boxes",
       description: "Durable plastic solutions for core sample storage and transport.",
-      image: "/core-tray.webp",
+      image: "/products/12.png",
+      link: "/products/core-trays",
     },
     {
-      name: "Drill Rods",
-      description: "High-strength rods for various drilling applications.",
-      image: "/drill-rod.jpg",
-    },
-    {
-      name: "Core Barrels",
-      description: "Precision-engineered barrels for core sampling.",
-      image: "/core-barrel.jpg",
+      name: "Core Drilling System & Accessories",
+      description: "High-performance drilling systems and essential accessories for core sampling.",
+      image: "/products/14.png",
+      link: "/products/core-drilling-system",
     },
     {
       name: "Diamond & Tungsten Carbide Tools",
       description: "Advanced cutting tools for mineral exploration and mining.",
-      image: "/diamond.jpg",
-    },
-    {
-      name: "Overshots & Accessories",
-      description: "Essential accessories for drilling operations.",
-      image: "/overshot.webp",
+      image: "/products/11.png",
+      link: "/products/diamond-tungsten-tools",
     },
     {
       name: "Drill Rigs",
       description: "Robust and reliable drill rigs designed for mineral exploration.",
-      image: "/drill-rig.jpg",
+      image: "/products/10.png",
+      link: "/products/drill-rigs",
     }
   ];
 
@@ -113,7 +108,7 @@ export default function ProductCategories() {
 
                   {/* Animated link */}
                   <a
-                    href="/products"
+                    href={category.link}
                     className="inline-flex items-center text-blue-700 font-semibold group/link hover:text-blue-900 transition-colors mt-4"
                   >
                     <span className="relative">
@@ -146,19 +141,6 @@ export default function ProductCategories() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* View all button */}
-        <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '800ms' }}>
-          <a
-            href="/products"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-black to-blue-600 hover:from-gray-900 hover:to-blue-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            View All Products
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
         </div>
       </div>
 
