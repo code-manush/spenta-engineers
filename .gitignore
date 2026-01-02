@@ -41,10 +41,10 @@ yarn-error.log*
 next-env.d.ts
 
 # Large media files (optional - uncomment if you want to ignore these)
-# public/*.mp4
-# public/*.png
-# public/*.jpg
-# public/*.jpeg
+public/1.png
+public/3.png
+public/image1.png
+
 
 # IDE
 .vscode/
