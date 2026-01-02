@@ -28,7 +28,7 @@ export async function sendContactForm(
 
     await transporter.sendMail({
       from: `"Website Enquiry" <${process.env.EMAIL_USER}>`,
-      to: "info@spentaengineers.com",
+      to: "spentaeng@gmail.com",
       replyTo: email,
       subject: `New Enquiry from ${name}`,
       html: `
