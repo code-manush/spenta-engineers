@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {
     const [activeImage, setActiveImage] = useState(0);
@@ -31,6 +32,20 @@ export default function DrillRodsPage() {
                     <p className="max-w-3xl text-gray-300 text-xl leading-relaxed">
                         Head assemblies connect the drill rod string to the core barrel and enable smooth rotation, fluid circulation, and efficient wireline core recovery during drilling operations.
                     </p>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Core Drilling System", href: "/products/core-drilling-system" },
+                            { label: "Head Assembly", href: "/products/core-drilling-system/head-assembly" },
+                        ]}
+                    />
                 </div>
             </section>
 

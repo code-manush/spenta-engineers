@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Industries We Serve",
   description:
-    "Industries served by Spenta Engineers including mining, mineral exploration, geotechnical drilling, and infrastructure projects.",
+    "Spenta Engineers serves multiple industries including mining, mineral exploration, geotechnical drilling, and infrastructure projects with precision drilling tools and equipment.",
+  alternates: {
+    canonical: "/industries",
+  },
+  openGraph: {
+    title: "Industries We Serve | Spenta Engineers",
+    description:
+      "Discover how Spenta Engineers supports mining, exploration, geotechnical, and infrastructure industries with reliable drilling solutions.",
+    url: "https://www.spentaengineers.com/industries",
+  },
 };
 
 export default function IndustriesPage() {
   return (
     <section className="bg-white">
-
       {/* Hero */}
       <section
         className="relative py-50 text-white bg-cover bg-center"
@@ -44,6 +53,18 @@ export default function IndustriesPage() {
             drilling tools engineered for performance, durability, and
             operational efficiency in demanding environments.
           </p>
+        </div>
+      </section>
+
+      {/* Breadcrumbs */}
+      <section className="bg-gray-50 border-b border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Industries", href: "/industries" },
+            ]}
+          />
         </div>
       </section>
 

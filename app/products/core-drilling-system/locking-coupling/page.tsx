@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {
     return (
@@ -29,6 +30,20 @@ export default function DrillRodsPage() {
                     <p className="max-w-3xl text-gray-300 text-xl leading-relaxed">
                             Locking couplings are precision components used to secure internal drilling assemblies and ensure positive engagement between wireline system components during core drilling operations.
                     </p>    
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Core Drilling System", href: "/products/core-drilling-system" },
+                            { label: "Locking Coupling", href: "/products/core-drilling-system/locking-coupling" },
+                        ]}
+                    />
                 </div>
             </section>
 

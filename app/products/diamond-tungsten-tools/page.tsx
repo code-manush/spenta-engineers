@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {
 
@@ -30,6 +31,19 @@ export default function DrillRodsPage() {
                     <p className="max-w-3xl text-gray-300 text-xl leading-relaxed">
                         Diamond and tungsten carbide tools are cutting components designed to penetrate a wide range of geological formations during mineral exploration, mining, and geotechnical drilling operations.
                     </p>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Diamond & Tungsten Tools", href: "/products/diamond-tungsten-tools" },
+                        ]}
+                    />
                 </div>
             </section>
 

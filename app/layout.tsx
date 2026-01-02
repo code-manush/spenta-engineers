@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Roboto } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/navbar";
 import Footer from "@/components/footer";
@@ -12,10 +13,6 @@ export const metadata: Metadata = {
   },
   description:
     "Spenta Engineers is a manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-icon.png",
-  },
   keywords: [
     "drilling tools manufacturer",
     "drill rods",
@@ -23,10 +20,29 @@ export const metadata: Metadata = {
     "diamond drilling tools",
     "mining drilling equipment",
     "geotechnical drilling tools",
+    "core drilling system",
+    "drilling accessories",
+    "mining equipment India",
+    "exploration drilling tools",
   ],
-  metadataBase: new URL("https://www.spentaengineers.com"), // update domain later
+  authors: [{ name: "Spenta Engineers" }],
+  creator: "Spenta Engineers",
+  publisher: "Spenta Engineers",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://www.spentaengineers.com"),
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
-    title: "Spenta Engineers",
+    title: "Spenta Engineers | Precision Drilling Tools Manufacturer",
     description:
       "Precision-engineered drilling tools designed for demanding mining and exploration applications.",
     url: "https://www.spentaengineers.com",
@@ -41,6 +57,29 @@ export const metadata: Metadata = {
     ],
     locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spenta Engineers | Precision Drilling Tools Manufacturer",
+    description:
+      "Precision-engineered drilling tools designed for demanding mining and exploration applications.",
+    images: ["/og-image.jpg"],
+    creator: "@spentaengineers",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // Add Google Search Console verification when available
+    // google: "your-google-verification-code",
   },
 };
 
@@ -63,11 +102,84 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Spenta Engineers",
+    url: "https://www.spentaengineers.com",
+    logo: "https://www.spentaengineers.com/logo.png",
+    description:
+      "Manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Vadodara-390024",
+      addressLocality: "Vadodara",
+      addressRegion: "Gujarat",
+      postalCode: "390024",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-9426753291",
+      contactType: "Customer Service",
+      email: "spentaeng@gmail.com",
+      areaServed: "Worldwide",
+      availableLanguage: ["English"],
+    },
+    sameAs: [
+      // Add social media links when available
+    ],
+  };
+
+  const localBusinessData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Spenta Engineers",
+    image: "https://www.spentaengineers.com/logo.png",
+    "@id": "https://www.spentaengineers.com",
+    url: "https://www.spentaengineers.com",
+    telephone: "+91-9426753291",
+    email: "spentaeng@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Vadodara-390024",
+      addressLocality: "Vadodara",
+      addressRegion: "Gujarat",
+      postalCode: "390024",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      // Add coordinates if available
+    },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:30",
+      closes: "18:30",
+    },
+  };
+
   return (
     <html lang="en">
-      <body
-        className={roboto.variable}
-      >
+      <body className={roboto.variable}>
+        <Script
+          id="organization-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <Script
+          id="localbusiness-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
+        />
         <Navbar />
         {children}
         <Footer />

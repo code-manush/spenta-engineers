@@ -39,6 +39,19 @@ export default function DrillRodsPage() {
                 </div>
             </section>
 
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Drill Rigs", href: "/products/drill-rigs" },
+                        ]}
+                    />
+                </div>
+            </section>
+
             {/* Product Images Gallery */}
             <section className="py-16 bg-gradient-to-br from-gray-50 to-white border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-6">

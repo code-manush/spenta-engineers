@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendContactForm } from "./action";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -43,7 +44,6 @@ export default function ContactPage() {
 
   return (
     <section className="bg-white">
-
       {/* HERO */}
       <section
         className="relative py-50 bg-cover bg-center text-white"
@@ -74,6 +74,18 @@ export default function ContactPage() {
             Reach out to Spenta Engineers to discuss product specifications,
             manufacturing capabilities, or project requirements.
           </p>
+        </div>
+      </section>
+
+      {/* Breadcrumbs */}
+      <section className="bg-gray-50 border-b border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Contact", href: "/contact" },
+            ]}
+          />
         </div>
       </section>
 

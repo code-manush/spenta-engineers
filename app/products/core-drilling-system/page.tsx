@@ -1,7 +1,25 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Core Drilling System",
+  description:
+    "Complete core drilling system components including drill rods, core barrels, head assembly, overshot, and couplings. Precision-engineered for mineral exploration and geotechnical drilling applications.",
+  alternates: {
+    canonical: "/products/core-drilling-system",
+  },
+  openGraph: {
+    title: "Core Drilling System | Spenta Engineers",
+    description:
+      "Integrated drilling solution with compatible components for efficient mineral exploration and geotechnical drilling.",
+    url: "https://www.spentaengineers.com/products/core-drilling-system",
+  },
+};
+
+import Breadcrumbs from "@/components/Breadcrumbs";
+
 export default function CoreDrillingSystemPage() {
   return (
     <main className="bg-white">
-
       {/* Hero */}
       <section className="relative py-50 bg-gray-900 text-white overflow-hidden" style={{ backgroundImage: "url('/products/core-drilling-system-cover.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {/* Grid overlay */}
@@ -28,6 +46,19 @@ export default function CoreDrillingSystemPage() {
             and associated drilling components designed to work together designed to work together for efficient mineral
             exploration and geotechnical drilling.
           </p>
+        </div>
+      </section>
+
+      {/* Breadcrumbs */}
+      <section className="bg-gray-50 border-b border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Products", href: "/products" },
+              { label: "Core Drilling System", href: "/products/core-drilling-system" },
+            ]}
+          />
         </div>
       </section>
 

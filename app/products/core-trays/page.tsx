@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {
     const [activeImage, setActiveImage] = useState(0);
@@ -36,6 +37,19 @@ export default function DrillRodsPage() {
                     <p className="max-w-3xl text-gray-300 text-xl leading-relaxed">
                         Plastic core trays and boxes are used for systematic storage, handling, and transportation of drilled core samples during mineral exploration and geotechnical investigations.
                     </p>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Core Trays", href: "/products/core-trays" },
+                        ]}
+                    />
                 </div>
             </section>
 

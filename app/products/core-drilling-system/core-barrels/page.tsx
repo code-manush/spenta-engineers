@@ -2,10 +2,24 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
-export default function DrillRodsPage() {
+export default function CoreBarrelsPage() {
     return (
         <main className="bg-white">
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4 pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Core Drilling System", href: "/products/core-drilling-system" },
+                            { label: "Core Barrels", href: "/products/core-drilling-system/core-barrels" },
+                        ]}
+                    />
+                </div>
+            </section>
 
             {/* Hero */}
             <section className="relative py-50 bg-gray-900 text-white overflow-hidden">

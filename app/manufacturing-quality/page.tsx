@@ -1,14 +1,35 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Manufacturing & Quality",
   description:
-    "Explore Spenta Engineers' manufacturing processes and quality assurance practices ensuring consistent performance and reliability.",
+    "Explore Spenta Engineers' manufacturing processes, quality control systems, and quality assurance practices ensuring consistent performance and reliability in drilling tools.",
+  alternates: {
+    canonical: "/manufacturing-quality",
+  },
+  openGraph: {
+    title: "Manufacturing & Quality | Spenta Engineers",
+    description:
+      "Learn about our precision manufacturing processes and rigorous quality control standards.",
+    url: "https://www.spentaengineers.com/manufacturing-quality",
+  },
 };
 
 export default function ManufacturingQualityPage() {
     return (
         <section className="bg-white">
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4 pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Manufacturing & Quality", href: "/manufacturing-quality" },
+                        ]}
+                    />
+                </div>
+            </section>
 
             {/* Hero */}
             <section
@@ -43,6 +64,18 @@ export default function ManufacturingQualityPage() {
                         At Spenta Engineers, manufacturing excellence and quality control
                         are at the core of every drilling tool we produce.
                     </p>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Manufacturing & Quality", href: "/manufacturing-quality" },
+                        ]}
+                    />
                 </div>
             </section>
 

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {
     const [activeImage, setActiveImage] = useState(0);
@@ -13,7 +14,6 @@ export default function DrillRodsPage() {
 
     return (
         <main className="bg-white">
-
             {/* Hero */}
             <section className="relative py-50 bg-gray-900 text-white overflow-hidden">
                 {/* Grid overlay */}
@@ -74,6 +74,20 @@ export default function DrillRodsPage() {
                             </button>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "Products", href: "/products" },
+                            { label: "Core Drilling System", href: "/products/core-drilling-system" },
+                            { label: "Drill Rods", href: "/products/core-drilling-system/drill-rods" },
+                        ]}
+                    />
                 </div>
             </section>
 

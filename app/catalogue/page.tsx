@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Product Catalogue",
   description:
-    "Download the complete Spenta Engineers product catalogue covering drill rods, core barrels, diamond tools, plastic core trays, and drilling accessories.",
+    "Download the complete Spenta Engineers product catalogue covering drill rods, core barrels, diamond tools, plastic core trays, and drilling accessories. PDF download available.",
+  alternates: {
+    canonical: "/catalogue",
+  },
+  openGraph: {
+    title: "Product Catalogue | Spenta Engineers",
+    description:
+      "Complete product catalogue with specifications for all drilling tools and accessories.",
+    url: "https://www.spentaengineers.com/catalogue",
+  },
 };
 
 export default function CataloguePage() {
   return (
     <section className="bg-white">
-
       {/* HERO */}
       <section
         className="relative bg-cover bg-center text-white flex items-end justify-start py-50"
@@ -40,6 +49,18 @@ export default function CataloguePage() {
             Access the complete range of Spenta Engineers drilling tools and
             accessories in a single, detailed product catalogue.
           </p>
+        </div>
+      </section>
+
+      {/* Breadcrumbs */}
+      <section className="bg-gray-50 border-b border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Catalogue", href: "/catalogue" },
+            ]}
+          />
         </div>
       </section>
 

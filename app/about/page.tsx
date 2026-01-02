@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -9,7 +10,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <section className="bg-white">
-
             {/* HERO */}
             <section
                 className="relative h-[85vh] text-white bg-cover bg-center flex items-end"
@@ -41,6 +41,18 @@ export default function AboutPage() {
                         precision drilling tools designed to perform reliably in demanding
                         field conditions.
                     </p>
+                </div>
+            </section>
+
+            {/* Breadcrumbs */}
+            <section className="bg-gray-50 border-b border-gray-200 py-4">
+                <div className="max-w-7xl mx-auto px-6">
+                    <Breadcrumbs
+                        items={[
+                            { label: "Home", href: "/" },
+                            { label: "About Us", href: "/about" },
+                        ]}
+                    />
                 </div>
             </section>
 
