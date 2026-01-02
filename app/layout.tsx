@@ -34,9 +34,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://www.spentaengineers.com"),
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
@@ -132,54 +129,41 @@ export default function RootLayout({
   };
 
   const localBusinessData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Spenta Engineers",
-    image: "https://www.spentaengineers.com/logo.png",
-    "@id": "https://www.spentaengineers.com",
-    url: "https://www.spentaengineers.com",
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Spenta Engineers",
+  url: "https://www.spentaengineers.com",
+  logo: "https://www.spentaengineers.com/logo.png",
+  image: "https://www.spentaengineers.com/logo.png",
+  description:
+    "Manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Vadodara-390024",
+    addressLocality: "Vadodara",
+    addressRegion: "Gujarat",
+    postalCode: "390024",
+    addressCountry: "IN",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
     telephone: "+91-9426753291",
+    contactType: "Customer Service",
     email: "spentaeng@gmail.com",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Vadodara-390024",
-      addressLocality: "Vadodara",
-      addressRegion: "Gujarat",
-      postalCode: "390024",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      // Add coordinates if available
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "09:30",
-      closes: "18:30",
-    },
-  };
+    areaServed: "Worldwide",
+    availableLanguage: ["English"],
+  },
+};
 
   return (
     <html lang="en">
       <body className={roboto.variable}>
+
         <Script
-          id="organization-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <Script
-          id="localbusiness-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
-        />
+  id="localbusiness-structured-data"
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
+/>
         <Navbar />
         {children}
         <Footer />
