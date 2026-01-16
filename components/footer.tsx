@@ -141,11 +141,11 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3">
                 {[
-                  { name: "Drill Rods", href: "/products/drill-rods" },
-                  { name: "Core Barrels", href: "/products/core-barrels" },
-                  { name: "Diamond Tools", href: "/products/diamond-tools" },
-                  { name: "Core Trays", href: "/products/plastic-core-trays" },
-                  { name: "Accessories", href: "/products/accessories" }
+                  { name: "Drill Rods", href: "/products/core-drilling-system/drill-rods" },
+                  { name: "Core Barrels", href: "/products/core-drilling-system/core-barrels" },
+                  { name: "Diamond Tools", href: "/products/diamond-tungsten-tools" },
+                  { name: "Core Trays", href: "/products/core-trays" },
+                  { name: "Drilling Rigs", href: "/products/drill-rigs" }
                 ].map((link, i) => (
                   <li key={i}>
                     <a href={link.href} className="text-gray-400 hover:text-white transition-all inline-block group">
@@ -198,10 +198,6 @@ export default function Footer() {
           <div className="max-w-7xl mx-auto px-6 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
               <p>&copy; 2025 Spenta Engineers. All rights reserved.</p>
-              <div className="flex gap-6">
-                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              </div>
               <p>Designed & Manufactured in India</p>
             </div>
           </div>

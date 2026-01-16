@@ -190,7 +190,7 @@ export default function IndustriesPage() {
             industry requirements.
           </p>
           <a
-            href="/products"
+            href="/products/core-trays"
             className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg group"
           >
             <span>View Products</span>
