@@ -71,7 +71,7 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
         className={`flex items-center gap-2 text-sm ${className}`}
         style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}
       >
-        <ol className="flex items-center gap-2 flex-wrap" itemScope itemType="https://schema.org/BreadcrumbList">
+        <ol className="flex items-center gap-2 flex-wrap">
           {breadcrumbItems.map((item, index) => {
             const isLast = index === breadcrumbItems.length - 1;
             
@@ -79,14 +79,10 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
               <li
                 key={item.href}
                 className="flex items-center gap-2"
-                itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
               >
                 {isLast ? (
                   <span
                     className="text-gray-600 font-medium"
-                    itemProp="name"
                   >
                     {item.label}
                   </span>
@@ -95,11 +91,9 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
                     <Link
                       href={item.href}
                       className="text-blue-600 hover:text-blue-700 transition-colors"
-                      itemProp="item"
                     >
-                      <span itemProp="name">{item.label}</span>
+                      <span>{item.label}</span>
                     </Link>
-                    <meta itemProp="position" content={String(index + 1)} />
                     <svg
                       className="w-4 h-4 text-gray-400"
                       fill="none"
