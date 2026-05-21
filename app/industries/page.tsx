@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
@@ -148,10 +149,11 @@ export default function IndustriesPage() {
               className="group bg-white rounded-sm overflow-hidden shadow-lg border-2 border-gray-200 hover:border-blue-600 transition-all hover:shadow-2xl"
             >
               <div className="relative h-64 overflow-hidden bg-gray-100">
-                <img
+                <Image
                   src={industry.image}
                   alt={industry.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 

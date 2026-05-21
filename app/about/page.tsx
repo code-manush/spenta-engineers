@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
@@ -91,9 +92,11 @@ export default function AboutPage() {
 
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-gray-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <img
+                        <Image
                             src="/about-hero.jpg"
                             alt="Manufacturing Facility"
+                            width={800}
+                            height={480}
                             className="relative w-full h-[480px] object-cover rounded-sm shadow-2xl border border-gray-200 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                     </div>
@@ -150,9 +153,11 @@ export default function AboutPage() {
                     {/* Image */}
                     <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-gray-600/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <img
+                        <Image
                             src="/f.png"
                             alt="Founder – Spenta Engineers"
+                            width={800}
+                            height={520}
                             className="relative w-full h-[520px] object-cover rounded-sm shadow-2xl border border-gray-200 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                     </div>
@@ -166,19 +171,19 @@ export default function AboutPage() {
                             </p>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                            Founder's Message
+                            Founder&apos;s Message
                         </h2>
 
                         <div className="space-y-6 text-lg text-gray-700 leading-relaxed mb-8">
                             <p className="pl-6 border-l-4 border-blue-600">
-                                "Spenta Engineers was founded with a simple belief — that drilling
+                                &quot;Spenta Engineers was founded with a simple belief — that drilling
                                 tools should be engineered with responsibility, precision, and a
                                 deep understanding of field realities.
                             </p>
 
                             <p className="pl-6 border-l-4 border-gray-300">
                                 Every product we manufacture reflects our commitment to quality,
-                                performance, and long-term partnerships with our clients."
+                                performance, and long-term partnerships with our clients.&quot;
                             </p>
                         </div>
 
@@ -268,7 +273,7 @@ export default function AboutPage() {
                         Build With a Trusted Manufacturing Partner
                     </h2>
                     <p className="text-lg text-gray-600 mb-10">
-                        Let's discuss how Spenta Engineers can support your drilling
+                        Let&apos;s discuss how Spenta Engineers can support your drilling
                         requirements with precision-engineered solutions.
                     </p>
                     <a

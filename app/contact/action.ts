@@ -40,7 +40,7 @@ export async function sendContactForm(
     });
 
     return { success: true, error: null };
-  } catch (err) {
+  } catch {
     return { success: false, error: "Failed to send message. Try again later." };
   }
 }

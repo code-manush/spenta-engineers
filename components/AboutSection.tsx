@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -126,7 +128,7 @@ export default function AboutSection() {
               }`}
               style={{ transitionDelay: '600ms' }}
             >
-              <a 
+              <Link 
                 href="/about"
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-black to-blue-600 hover:from-gray-900 hover:to-blue-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group"
               >
@@ -134,7 +136,7 @@ export default function AboutSection() {
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -149,9 +151,11 @@ export default function AboutSection() {
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
               
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+                <Image
                   src="/about.jpg"
                   alt="Spenta Engineers Manufacturing Facility"
+                  width={600}
+                  height={420}
                   className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
                 

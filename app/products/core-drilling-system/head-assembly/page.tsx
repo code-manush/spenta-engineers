@@ -1,12 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
-export default function DrillRodsPage() {
-    const [activeImage, setActiveImage] = useState(0);
-
+export default function HeadAssemblyPage() {
     return (
         <main className="bg-white">
 

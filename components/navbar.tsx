@@ -8,7 +8,6 @@ import { useRouter, usePathname } from "next/navigation";
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showSearch, setShowSearch] = useState(false);
     const [showProductsDropdown, setShowProductsDropdown] = useState(false);
 
     const router = useRouter();
@@ -89,21 +88,21 @@ const Navbar = () => {
                                         {/* Dropdown */}
                                         <div className={`absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 shadow-2xl overflow-hidden transition-all duration-300 ${showProductsDropdown ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                                             <div className="py-2">
-                                                <a href="/products/core-trays" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                                <Link href="/products/core-trays" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                                     <div className="font-medium">Core Trays and Boxes</div>
-                                                </a>
+                                                </Link>
                                                 <div className="h-px bg-gray-200 mx-4" />
-                                                <a href="/products/core-drilling-system" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                                <Link href="/products/core-drilling-system" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                                     <div className="font-medium">Core Drilling System</div>
-                                                </a>
+                                                </Link>
                                                 <div className="h-px bg-gray-200 mx-4" />
-                                                <a href="/products/drill-rigs" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                                <Link href="/products/drill-rigs" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                                     <div className="font-medium">Drilling Rigs</div>
-                                                </a>
+                                                </Link>
                                                 <div className="h-px bg-gray-200 mx-4" />
-                                                <a href="/products/diamond-tungsten-tools" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                                <Link href="/products/diamond-tungsten-tools" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                                     <div className="font-medium">Diamond and Carbide Tools</div>
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -161,18 +160,18 @@ const Navbar = () => {
                                             </button>
                                             <div className={`overflow-hidden transition-all duration-300 ${showProductsDropdown ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                                                 <div className="ml-4 mt-2 space-y-1 border-l-2 border-blue-200 pl-4">
-                                                    <a href="/products/core-trays" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                                    <Link href="/products/core-trays" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
                                                         Core Trays and Boxes
-                                                    </a>
-                                                    <a href="/products/core-drilling-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                                    </Link>
+                                                    <Link href="/products/core-drilling-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
                                                         Core Drilling System
-                                                    </a>
-                                                    <a href="/products/drill-rigs" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                                    </Link>
+                                                    <Link href="/products/drill-rigs" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
                                                         Drilling Rigs
-                                                    </a>
-                                                    <a href="/products/diamond-tungsten-tools" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                                    </Link>
+                                                    <Link href="/products/diamond-tungsten-tools" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
                                                         Diamond and Carbide Tools
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>

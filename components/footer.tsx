@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -78,10 +79,12 @@ export default function Footer() {
             
             {/* Company info */}
             <div className="lg:col-span-2 space-y-6">
-              <img
+              <Image
                 src="/logo-white.png"
                 alt="Spenta Engineers"
-                className="h-16 object-contain transition-transform duration-300 hover:scale-105"
+                width={200}
+                height={64}
+                className="h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
               />
               <p className="text-gray-400 leading-relaxed max-w-sm">
                 Manufacturing excellence in precision drilling tools for mineral exploration, mining, and geotechnical applications worldwide.

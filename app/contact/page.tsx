@@ -68,7 +68,7 @@ export default function ContactPage() {
             </p>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Let's Discuss Your Requirements
+            Let&apos;s Discuss Your Requirements
           </h1>
           <p className="text-xl text-gray-200 max-w-xl leading-relaxed">
             Reach out to Spenta Engineers to discuss product specifications,
@@ -244,7 +244,7 @@ export default function ContactPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <p className="text-green-700 font-semibold">
-                      Your message has been sent successfully. We'll get back to you shortly.
+                      Your message has been sent successfully. We&apos;ll get back to you shortly.
                     </p>
                   </div>
                 </div>

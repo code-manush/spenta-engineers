@@ -1,7 +1,8 @@
 "use client";
 
-import { link } from "fs";
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductCategories() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -88,9 +89,11 @@ export default function ProductCategories() {
 
                 {/* Image with zoom effect */}
                 <div className="relative h-48 mb-6 rounded-xl overflow-hidden bg-gray-100">
-                  <img
+                  <Image
                     src={category.image}
                     alt={category.name}
+                    width={400}
+                    height={200}
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -107,7 +110,7 @@ export default function ProductCategories() {
                   </p>
 
                   {/* Animated link */}
-                  <a
+                  <Link
                     href={category.link}
                     className="inline-flex items-center text-blue-700 font-semibold group/link hover:text-blue-900 transition-colors mt-4"
                   >
@@ -128,7 +131,7 @@ export default function ProductCategories() {
                         d="M13 7l5 5m0 0l-5 5m5-5H6"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Hover effect particles */}

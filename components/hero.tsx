@@ -2,37 +2,39 @@
 
 import { useState, useEffect, useRef } from "react";
 
+import Image from "next/image";
+
+const slides = [
+  {
+    type: "video",
+    eyebrow: "SPENTA ENGINEERS",
+    headline: "Innovation with Excellence",
+    supporting:
+      "Manufacturer and supplier of precision drilling tools for mineral exploration, mining & geotechnical applications",
+    video: "/1.mp4",
+  },
+  {
+    type: "image",
+    eyebrow: "PRODUCT RANGE",
+    headline: "Comprehensive Drilling Solutions",
+    supporting:
+      "Plastic core trays, drill rods, core barrels, diamond & tungsten carbide tools, and drilling accessories",
+    image: "/2.png",
+  },
+  {
+    type: "image",
+    eyebrow: "MANUFACTURING & QUALITY",
+    headline: "Built for Demanding Field Conditions",
+    supporting:
+      "Controlled manufacturing processes and field-tested designs ensuring reliability and consistent performance",
+    image: "/1.webp",
+  },
+];
+
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  const slides = [
-    {
-      type: "video",
-      eyebrow: "SPENTA ENGINEERS",
-      headline: "Innovation with Excellence",
-      supporting:
-        "Manufacturer and supplier of precision drilling tools for mineral exploration, mining & geotechnical applications",
-      video: "/1.mp4",
-    },
-    {
-      type: "image",
-      eyebrow: "PRODUCT RANGE",
-      headline: "Comprehensive Drilling Solutions",
-      supporting:
-        "Plastic core trays, drill rods, core barrels, diamond & tungsten carbide tools, and drilling accessories",
-      image: "/2.png",
-    },
-    {
-      type: "image",
-      eyebrow: "MANUFACTURING & QUALITY",
-      headline: "Built for Demanding Field Conditions",
-      supporting:
-        "Controlled manufacturing processes and field-tested designs ensuring reliability and consistent performance",
-      image: "/1.webp",
-    },
-  ];
 
   useEffect(() => {
     const timer = setTimeout(
@@ -101,9 +103,10 @@ export default function Hero() {
             />
           )}
 
-          {slide.type === "image" && (
-            <img
+          {slide.type === "image" && slide.image && (
+            <Image
               src={slide.image}
+              fill
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[8000ms]"
               style={{ transform: index === currentSlide ? 'scale(1.1)' : 'scale(1)' }}
               alt=""

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export default function DrillRodsPage() {

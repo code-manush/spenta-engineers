@@ -1,9 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function CTASection() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [particles, setParticles] = useState<Array<{left: string, top: string, animationDelay: string, animationDuration: string}>>([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setParticles([...Array(20)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 5}s`,
+        animationDuration: `${5 + Math.random() * 10}s`
+      })));
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="relative py-24 bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden">
@@ -21,16 +34,11 @@ export default function CTASection() {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         
         {/* Animated particles */}
-        {[...Array(20)].map((_, i) => (
+        {particles.map((style, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full animate-float-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 10}s`
-            }}
+            style={style}
           />
         ))}
       </div>
@@ -76,8 +84,6 @@ export default function CTASection() {
           <a
             href="/spenta-engineers-catalogue.pdf"
             target="_blank"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-black to-blue-700 hover:from-gray-900 hover:to-blue-700 px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 overflow-hidden"
           >
             {/* Shine effect */}
@@ -96,7 +102,7 @@ export default function CTASection() {
           </a>
 
           {/* Secondary CTA - Contact */}
-          <a
+          <Link
             href="/contact"
             className="group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white/30 hover:border-white/50 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105"
           >
@@ -107,7 +113,7 @@ export default function CTASection() {
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </a>
+          </Link>
         </div>
 
         {/* Additional info */}

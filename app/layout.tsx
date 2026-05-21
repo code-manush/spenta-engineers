@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
@@ -80,18 +80,11 @@ export const metadata: Metadata = {
   },
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
 const roboto = Roboto({
-  subsets: ["latin"], weight: ["400", "700"], variable: "--font-roboto"
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-roboto",
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -99,34 +92,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Spenta Engineers",
-    url: "https://www.spentaengineers.com",
-    logo: "https://www.spentaengineers.com/logo.png",
-    description:
-      "Manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Vadodara-390024",
-      addressLocality: "Vadodara",
-      addressRegion: "Gujarat",
-      postalCode: "390024",
-      addressCountry: "IN",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+91-9426753291",
-      contactType: "Customer Service",
-      email: "spentaeng@gmail.com",
-      areaServed: "Worldwide",
-      availableLanguage: ["English"],
-    },
-    sameAs: [
-      // Add social media links when available
-    ],
-  };
 
   const localBusinessData = {
   "@context": "https://schema.org",

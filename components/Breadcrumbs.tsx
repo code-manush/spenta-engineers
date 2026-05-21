@@ -27,7 +27,7 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
     ];
 
     let currentPath = "";
-    paths.forEach((path, index) => {
+    paths.forEach((path) => {
       currentPath += `/${path}`;
       
       // Convert path to readable label

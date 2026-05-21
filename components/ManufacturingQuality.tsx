@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function ManufacturingQuality() {
   const [isVisible, setIsVisible] = useState(false);
@@ -108,9 +109,11 @@ export default function ManufacturingQuality() {
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-gray-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity" />
               
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200">
-                <img
+                <Image
                   src="/manufacturing-quality.jpg"
                   alt="Manufacturing and Quality Control"
+                  width={800}
+                  height={420}
                   className="w-full h-[420px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                 />
                 

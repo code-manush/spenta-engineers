@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function IndustriesServed() {
   const [isVisible, setIsVisible] = useState(false);
@@ -94,9 +96,10 @@ export default function IndustriesServed() {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Image */}
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
+                fill
                 className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
                   activeIndex === index ? 'scale-110' : 'scale-100'
                 }`}
@@ -179,7 +182,7 @@ export default function IndustriesServed() {
                 Explore our complete product range tailored for your industry
               </p>
             </div>
-            <a
+            <Link
               href="/industries"
               className="flex-shrink-0 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 shadow-lg group"
             >
@@ -187,7 +190,7 @@ export default function IndustriesServed() {
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
