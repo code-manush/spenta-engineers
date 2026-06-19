@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight } from 'lucide-react';
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,13 +49,13 @@ export default function ProductCategories() {
         {/* Animated header */}
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block">
-            <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-2 animate-fade-in">
+            <p className="text-sm uppercase tracking-widest text-accent font-semibold mb-2 animate-fade-in">
               Our Solutions
             </p>
-            <h2 className="text-5xl font-bold text-gray-900 tracking-tight animate-slide-up">
+            <h2 className="text-5xl font-bold text-graphite tracking-tight animate-slide-up">
               PRODUCT CATEGORIES
             </h2>
-            <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-blue-900 mx-auto mt-4 rounded-full animate-expand" />
+            <div className="h-1 w-32 bg-gradient-to-r from-accent to-blue-900 mx-auto mt-4 rounded-full animate-expand" />
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-fade-in-delayed">
             Comprehensive drilling solutions engineered for precision and reliability
@@ -101,7 +102,7 @@ export default function ProductCategories() {
 
                 {/* Text content */}
                 <div className="space-y-3">
-                  <h3 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-graphite leading-tight group-hover:text-accent transition-colors duration-300">
                     {category.name}
                   </h3>
 
@@ -116,21 +117,9 @@ export default function ProductCategories() {
                   >
                     <span className="relative">
                       Explore Products
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover/link:w-full transition-all duration-300" />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover/link:w-full transition-all duration-300" />
                     </span>
-                    <svg
-                      className="ml-2 w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
+                    <ArrowRight className="ml-2 w-5 h-5 transform group-hover/link:translate-x-1 transition-transform duration-300" strokeWidth={2} />
                   </Link>
                 </div>
 

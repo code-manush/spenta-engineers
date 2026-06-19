@@ -1,3 +1,4 @@
+import { Wrench, Search, Map, Building2, ArrowRight } from 'lucide-react';
 import type { Metadata } from "next";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -74,12 +75,12 @@ export default function IndustriesPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-blue-600" />
-              <span className="text-sm uppercase tracking-widest text-blue-600 font-semibold">
+              <div className="h-px w-8 bg-accent" />
+              <span className="text-sm uppercase tracking-widest text-accent font-semibold">
                 Our Expertise
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-graphite mb-6">
               Application-Focused Engineering
             </h2>
 
@@ -108,9 +109,7 @@ export default function IndustriesPage() {
               image: "/mining.jpg",
               description: "Reliable drilling tools designed to withstand high loads, abrasive formations, and continuous operations in mining environments.",
               icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                </svg>
+                <Wrench className="w-6 h-6" strokeWidth={2} />
               )
             },
             {
@@ -118,9 +117,7 @@ export default function IndustriesPage() {
               image: "/exploration.jpg",
               description: "Precision tools for accurate core recovery, geological logging, and exploration drilling across varied terrains.",
               icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+                <Search className="w-6 h-6" strokeWidth={2} />
               )
             },
             {
@@ -128,9 +125,7 @@ export default function IndustriesPage() {
               image: "/geotechnical.jpg",
               description: "Tools engineered for soil investigation, foundation analysis, and subsurface assessment in infrastructure projects.",
               icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
+                <Map className="w-6 h-6" strokeWidth={2} />
               )
             },
             {
@@ -138,15 +133,13 @@ export default function IndustriesPage() {
               image: "/infrastructure.jpg",
               description: "Drilling equipment supporting foundation work, site investigations, and construction-related drilling applications.",
               icon: (
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+                <Building2 className="w-6 h-6" strokeWidth={2} />
               )
             }
           ].map((industry, index) => (
             <div 
               key={index} 
-              className="group bg-white rounded-sm overflow-hidden shadow-lg border-2 border-gray-200 hover:border-blue-600 transition-all hover:shadow-2xl"
+              className="group bg-white rounded-sm overflow-hidden shadow-lg border-2 border-gray-200 hover:border-accent transition-all hover:shadow-2xl"
             >
               <div className="relative h-64 overflow-hidden bg-gray-100">
                 <Image
@@ -158,7 +151,7 @@ export default function IndustriesPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 
                 {/* Icon badge */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm flex items-center justify-center text-white group-hover:bg-blue-600 group-hover:border-blue-600 transition-all">
+                <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm flex items-center justify-center text-white group-hover:bg-accent group-hover:border-accent transition-all">
                   {industry.icon}
                 </div>
 
@@ -184,7 +177,7 @@ export default function IndustriesPage() {
       {/* Product Link */}
       <section className="py-24 bg-white text-center border-t border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl font-bold text-graphite mb-6">
             Products Designed for Real-World Applications
           </h2>
           <p className="text-lg text-gray-600 mb-10">
@@ -193,20 +186,18 @@ export default function IndustriesPage() {
           </p>
           <a
             href="/products/core-trays"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg group"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-blue-700 text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg group"
           >
             <span>View Products</span>
-            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
           </a>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gray-900 text-white">
+      <section className="py-24 bg-graphite text-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-blue-900/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-sm p-12 text-center">
+          <div className="bg-gradient-to-r from-blue-900/50 to-graphite/50 backdrop-blur-sm border border-white/10 rounded-sm p-12 text-center">
             <h3 className="text-3xl font-bold mb-4">
               Unsure Which Products Suit Your Industry?
             </h3>
@@ -216,12 +207,10 @@ export default function IndustriesPage() {
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 px-10 py-4 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-graphite px-10 py-4 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg"
             >
               <span>Contact Us</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </a>
           </div>
         </div>

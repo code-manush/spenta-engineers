@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2, ArrowRight, Mail, Phone, MapPin, Clock, CheckCircle2, AlertCircle, FileDown } from 'lucide-react';
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendContactForm } from "./action";
@@ -15,23 +16,18 @@ function SubmitButton() {
       className={`w-full py-4 rounded-sm font-bold text-lg transition-all flex items-center justify-center gap-2
         ${pending
           ? "bg-gray-400 cursor-not-allowed"
-          : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-[1.02]"}
+          : "bg-accent text-white hover:bg-blue-700 hover:scale-[1.02]"}
       `}
     >
       {pending ? (
         <>
-          <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
+          <Loader2 className="animate-spin h-5 w-5" strokeWidth={4} />
           <span>Sending...</span>
         </>
       ) : (
         <>
           <span>Submit Enquiry</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          <ArrowRight className="w-5 h-5" strokeWidth={2} />
         </>
       )}
     </button>
@@ -96,12 +92,12 @@ export default function ContactPage() {
           {/* LEFT: CONTACT DETAILS */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-blue-600" />
-              <span className="text-sm uppercase tracking-widest text-blue-600 font-semibold">
+              <div className="h-px w-8 bg-accent" />
+              <span className="text-sm uppercase tracking-widest text-accent font-semibold">
                 Reach Out
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">
+            <h2 className="text-4xl font-bold text-graphite mb-8">
               Get in Touch
             </h2>
 
@@ -116,9 +112,7 @@ export default function ContactPage() {
               {[
                 {
                   icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                    <Mail className="w-6 h-6" strokeWidth={2} />
                   ),
                   label: "Email",
                   value: "spentaeng@gmail.com",
@@ -126,9 +120,7 @@ export default function ContactPage() {
                 },
                 {
                   icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                    <Phone className="w-6 h-6" strokeWidth={2} />
                   ),
                   label: "Phone",
                   value: "+91-9426753291",
@@ -136,10 +128,7 @@ export default function ContactPage() {
                 },
                 {
                   icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+                    <MapPin className="w-6 h-6" strokeWidth={2} />
                   ),
                   label: "Address",
                   value: "Vadodara-390024, Gujarat, India",
@@ -147,9 +136,7 @@ export default function ContactPage() {
                 },
                 {
                   icon: (
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <Clock className="w-6 h-6" strokeWidth={2} />
                   ),
                   label: "Business Hours",
                   value: "Monday – Saturday, 9:30 AM – 6:30 PM",
@@ -157,13 +144,13 @@ export default function ContactPage() {
                 }
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 group">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-50 border border-blue-100 rounded-sm flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-50 border border-blue-100 rounded-sm flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all">
                     {item.icon}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 mb-1">{item.label}</p>
+                    <p className="font-semibold text-graphite mb-1">{item.label}</p>
                     {item.href ? (
-                      <a href={item.href} className="text-gray-700 hover:text-blue-600 transition-colors">
+                      <a href={item.href} className="text-gray-700 hover:text-accent transition-colors">
                         {item.value}
                       </a>
                     ) : (
@@ -178,7 +165,7 @@ export default function ContactPage() {
 
           {/* RIGHT: FORM */}
           <div className="bg-white p-10 rounded-sm border-2 border-gray-200 shadow-xl">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8">
+            <h3 className="text-3xl font-bold text-graphite mb-8">
               Send Us a Message
             </h3>
 
@@ -192,7 +179,7 @@ export default function ContactPage() {
                   type="text"
                   name="name"
                   placeholder="John Doe"
-                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-accent transition-colors"
                   required
                 />
               </div>
@@ -205,7 +192,7 @@ export default function ContactPage() {
                   type="email"
                   name="email"
                   placeholder="john@company.com"
-                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-accent transition-colors"
                   required
                 />
               </div>
@@ -218,7 +205,7 @@ export default function ContactPage() {
                   type="text"
                   name="company"
                   placeholder="Your Company Name"
-                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-blue-600 transition-colors"
+                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-accent transition-colors"
                 />
               </div>
 
@@ -230,7 +217,7 @@ export default function ContactPage() {
                   placeholder="Tell us about your requirements..."
                   rows={5}
                   name="message"
-                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-blue-600 transition-colors resize-none"
+                  className="w-full p-4 rounded-sm border-2 border-gray-200 focus:outline-none focus:border-accent transition-colors resize-none"
                   required
                 />
               </div>
@@ -240,9 +227,7 @@ export default function ContactPage() {
               {state.success && (
                 <div className="p-4 bg-green-50 border-2 border-green-200 rounded-sm">
                   <div className="flex items-center gap-3">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-6 h-6 text-green-600" strokeWidth={2} />
                     <p className="text-green-700 font-semibold">
                       Your message has been sent successfully. We&apos;ll get back to you shortly.
                     </p>
@@ -253,9 +238,7 @@ export default function ContactPage() {
               {state.error && (
                 <div className="p-4 bg-red-50 border-2 border-red-200 rounded-sm">
                   <div className="flex items-center gap-3">
-                    <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <AlertCircle className="w-6 h-6 text-red-600" strokeWidth={2} />
                     <p className="text-red-600 font-semibold">
                       {state.error}
                     </p>
@@ -270,7 +253,7 @@ export default function ContactPage() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-24 bg-gray-900 text-white text-center">
+      <section className="py-24 bg-graphite text-white text-center">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-6">
             Looking for a Long-Term Manufacturing Partner?
@@ -282,11 +265,9 @@ export default function ContactPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="/catalogue"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-sm font-bold transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 bg-white text-graphite px-8 py-4 rounded-sm font-bold transition-all hover:scale-[1.02]"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+              <FileDown className="w-5 h-5" strokeWidth={2} />
               <span>Download Catalogue</span>
             </a>
             <a
@@ -294,9 +275,7 @@ export default function ContactPage() {
               className="inline-flex items-center gap-2 border-2 border-white/30 px-8 py-4 rounded-sm font-bold hover:bg-white/10 transition-all"
             >
               <span>View Products</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </a>
           </div>
         </div>

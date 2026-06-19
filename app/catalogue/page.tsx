@@ -1,3 +1,4 @@
+import { CheckCircle2, FileDown, Download, FileText, Folder, ClipboardList, Server, ArrowRight } from 'lucide-react';
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
@@ -71,12 +72,12 @@ export default function CataloguePage() {
           {/* LEFT */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-blue-600" />
-              <span className="text-sm uppercase tracking-widest text-blue-600 font-semibold">
+              <div className="h-px w-8 bg-accent" />
+              <span className="text-sm uppercase tracking-widest text-accent font-semibold">
                 Complete Overview
               </span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-graphite mb-6">
               Complete Product Overview
             </h2>
 
@@ -96,46 +97,36 @@ export default function CataloguePage() {
                 { 
                   name: "Drill Rods",
                   icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-5 h-5" strokeWidth={2} />
                   )
                 },
                 { 
                   name: "Core Barrels",
                   icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-5 h-5" strokeWidth={2} />
                   )
                 },
                 { 
                   name: "Diamond & Tungsten Carbide Tools",
                   icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-5 h-5" strokeWidth={2} />
                   )
                 },
                 { 
                   name: "Plastic Core Trays & Boxes",
                   icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-5 h-5" strokeWidth={2} />
                   )
                 },
                 { 
                   name: "Overshots & Drilling Accessories",
                   icon: (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CheckCircle2 className="w-5 h-5" strokeWidth={2} />
                   )
                 }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 text-lg text-gray-700">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-50 border border-blue-100 rounded-sm flex items-center justify-center text-blue-600">
+                  <div className="flex-shrink-0 w-8 h-8 bg-blue-50 border border-blue-100 rounded-sm flex items-center justify-center text-accent">
                     {item.icon}
                   </div>
                   <span>{item.name}</span>
@@ -152,13 +143,11 @@ export default function CataloguePage() {
             
             <div className="relative z-10">
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-sm mb-6 group-hover:scale-110 transition-transform">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-sm mb-6 group-hover:scale-110 transition-transform">
+                <FileDown className="w-10 h-10 text-white" strokeWidth={2} />
               </div>
 
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              <h3 className="text-3xl font-bold text-graphite mb-4">
                 Download Catalogue
               </h3>
 
@@ -169,25 +158,19 @@ export default function CataloguePage() {
               <a
                 href="/spenta-engineers-catalogue.pdf"
                 target="_blank"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg group/btn"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-blue-700 text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg group/btn"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
+                <Download className="w-6 h-6" strokeWidth={2} />
                 <span>Download PDF</span>
               </a>
 
               <div className="mt-6 flex items-center justify-center gap-6 text-sm text-gray-500">
                 <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                  </svg>
+                  <FileText className="w-4 h-4" strokeWidth={2} />
                   <span>PDF Format</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                  </svg>
+                  <Folder className="w-4 h-4" strokeWidth={2} />
                   <span>~10-15 MB</span>
                 </div>
               </div>
@@ -201,7 +184,7 @@ export default function CataloguePage() {
       <section className="py-24 bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-graphite mb-4">
               What&apos;s Inside the Catalogue
             </h2>
             <p className="text-lg text-gray-600">
@@ -213,37 +196,31 @@ export default function CataloguePage() {
             {[
               {
                 icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                  </svg>
+                  <ClipboardList className="w-6 h-6" strokeWidth={2} />
                 ),
                 title: "Technical Specifications",
                 description: "Detailed dimensions, materials, and performance data"
               },
               {
                 icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                  </svg>
+                  <Server className="w-6 h-6" strokeWidth={2} />
                 ),
                 title: "Product Configurations",
                 description: "Available sizes, variants, and compatibility information"
               },
               {
                 icon: (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+                  <FileText className="w-6 h-6" strokeWidth={2} />
                 ),
                 title: "Application Guidelines",
                 description: "Recommended use cases and industry applications"
               }
             ].map((item, i) => (
-              <div key={i} className="bg-gray-50 p-8 rounded-sm border border-gray-200 hover:border-blue-600 transition-all hover:shadow-lg group">
-                <div className="w-12 h-12 bg-white border border-gray-200 rounded-sm flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all">
+              <div key={i} className="bg-gray-50 p-8 rounded-sm border border-gray-200 hover:border-accent transition-all hover:shadow-lg group">
+                <div className="w-12 h-12 bg-white border border-gray-200 rounded-sm flex items-center justify-center text-accent mb-4 group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-graphite mb-3">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -256,7 +233,7 @@ export default function CataloguePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gray-900 text-white text-center">
+      <section className="py-24 bg-graphite text-white text-center">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-6">
             Need Custom Specifications or Pricing?
@@ -268,21 +245,17 @@ export default function CataloguePage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 px-12 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-graphite px-12 py-5 rounded-sm font-bold text-lg transition-all hover:scale-[1.02] shadow-lg"
             >
               <span>Contact Us</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </a>
             <a
               href="/products"
               className="inline-flex items-center gap-2 border-2 border-white/30 px-12 py-5 rounded-sm font-bold text-lg hover:bg-white/10 transition-all"
             >
               <span>Browse Products</span>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </a>
           </div>
         </div>

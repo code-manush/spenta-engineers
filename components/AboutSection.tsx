@@ -1,33 +1,18 @@
 "use client";
 
+import { ArrowRight } from 'lucide-react';
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useInView, Variants } from "framer-motion";
 
 export default function AboutSection() {
-  const [isVisible, setIsVisible] = useState(false);
   const [counters, setCounters] = useState({ years: 0, clients: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const isStatsInView = useInView(statsRef, { once: true, amount: 0.2 });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (isVisible) {
+    if (isStatsInView) {
       const duration = 2000;
       const steps = 60;
       const interval = duration / steps;
@@ -49,7 +34,7 @@ export default function AboutSection() {
 
       return () => clearInterval(timer);
     }
-  }, [isVisible]);
+  }, [isStatsInView]);
 
   const features = [
     {
@@ -74,9 +59,45 @@ export default function AboutSection() {
     }
   ];
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const slideRightVariants: Variants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const slideLeftVariants: Variants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
   return (
     <section 
-      ref={sectionRef}
       className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden"
     >
       {/* Animated background elements */}
@@ -88,67 +109,75 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header with animation */}
-        <div className="mb-16">
-          <div className={`inline-block transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-3">
+        <motion.div 
+          className="mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={itemVariants}
+        >
+          <div className="inline-block">
+            <p className="text-sm uppercase tracking-widest text-accent font-semibold mb-3">
               About Us
             </p>
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-bold text-graphite tracking-tight">
               SPENTA ENGINEERS
             </h2>
-            <div className="h-1 w-32 bg-gradient-to-r from-blue-600 to-black mt-4 rounded-full" />
+            <div className="h-1 w-32 bg-gradient-to-r from-accent to-black mt-4 rounded-full" />
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           
           {/* Text content */}
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+          >
             {[
               "Spenta Engineers specializes in manufacturing high-quality drilling tools and equipment for industrial applications.",
               "Our focus on precision engineering and quality control ensures reliable performance in demanding environments.",
               "Associated with Finerock Industries, we deliver solutions trusted by professionals in mineral exploration and mining.",
               "With years of expertise, we provide comprehensive support from design to delivery."
             ].map((text, index) => (
-              <p 
+              <motion.p 
                 key={index}
-                className={`text-xl text-gray-700 leading-relaxed transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                variants={slideRightVariants}
+                className="text-xl text-gray-700 leading-relaxed"
               >
                 {text}
-              </p>
+              </motion.p>
             ))}
 
             {/* CTA Button */}
-            <div 
-              className={`pt-6 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: '600ms' }}
+            <motion.div 
+              variants={slideRightVariants}
+              className="pt-6"
             >
               <Link 
                 href="/about"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-black to-blue-600 hover:from-gray-900 hover:to-blue-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-black to-accent hover:from-graphite hover:to-accent text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group"
               >
                 Learn More About Us
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Image with overlay effects */}
-          <div 
-            className={`relative transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={slideLeftVariants}
+            className="relative"
           >
             <div className="relative group">
               {/* Decorative frame */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-accent to-purple-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity" />
               
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <Image
@@ -165,56 +194,65 @@ export default function AboutSection() {
                 {/* Floating badge */}
                 <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                  <span className="font-semibold text-gray-900">Manufacturing Excellence</span>
+                  <span className="font-semibold text-graphite">Manufacturing Excellence</span>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Stats counters */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <motion.div 
+          ref={statsRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
           {[
             { value: counters.years, label: "Years Experience", suffix: "+" },
             { value: counters.clients, label: "Quality Assurance", suffix: "%" }
           ].map((stat, index) => (
-            <div 
+            <motion.div 
               key={index}
-              className={`text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${800 + index * 100}ms` }}
+              variants={itemVariants}
+              className="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-gray-600 bg-clip-text text-transparent mb-2">
+              <div className="text-5xl font-bold bg-gradient-to-r from-accent to-gray-600 bg-clip-text text-transparent mb-2">
                 {stat.value}{stat.suffix}
               </div>
               <div className="text-gray-600 font-medium">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Feature cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
           {features.map((feature, index) => (
-            <div 
+            <motion.div 
               key={index}
-              className={`group p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${1100 + index * 100}ms` }}
+              variants={itemVariants}
+              className="group p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
             >
               <div className="text-4xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors">
+              <h3 className="text-lg font-bold text-graphite mb-2 group-hover:text-blue-700 transition-colors">
                 {feature.title}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style jsx>{`

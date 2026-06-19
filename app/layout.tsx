@@ -1,9 +1,11 @@
-
-import { Roboto } from "next/font/google";
+import { Roboto, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/navbar";
 import Footer from "@/components/footer";
+import ProgressBar from "@/components/ProgressBar";
+import { QuoteListProvider } from "@/components/QuoteListContext";
+import QuoteCartSidebar from "@/components/QuoteCartSidebar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -87,6 +89,18 @@ const roboto = Roboto({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -122,16 +136,19 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={roboto.variable}>
-
-        <Script
-  id="localbusiness-structured-data"
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
-/>
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={`${roboto.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+        <QuoteListProvider>
+          <Script
+            id="localbusiness-structured-data"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessData) }}
+          />
+          <ProgressBar />
+          <Navbar />
+          {children}
+          <Footer />
+          <QuoteCartSidebar />
+        </QuoteListProvider>
       </body>
     </html>
   );

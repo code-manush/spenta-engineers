@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronRight } from 'lucide-react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
@@ -90,24 +91,11 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
                   <>
                     <Link
                       href={item.href}
-                      className="text-blue-600 hover:text-blue-700 transition-colors"
+                      className="text-accent hover:text-blue-700 transition-colors"
                     >
                       <span>{item.label}</span>
                     </Link>
-                    <svg
-                      className="w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
+                    <ChevronRight className="w-4 h-4 text-gray-400" strokeWidth={2} />
                   </>
                 )}
               </li>

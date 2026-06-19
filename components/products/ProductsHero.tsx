@@ -1,38 +1,71 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { ChevronRight, ArrowDown, FileDown } from 'lucide-react';
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 
 export default function ProductsHero() {
-    const [isVisible, setIsVisible] = useState(false);
     const [particles, setParticles] = useState<Array<{left: string, top: string, animation: string, animationDelay: string}>>([]);
+    const sectionRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start start", "end start"]
+    });
+    
+    // Parallax effect: background moves down half as fast as you scroll
+    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsVisible(true);
-            setParticles([...Array(15)].map(() => ({
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`
-            })));
-        }, 0);
-        return () => clearTimeout(timer);
+        setParticles([...Array(15)].map(() => ({
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
+            animationDelay: `${Math.random() * 5}s`
+        })));
     }, []);
+
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+            }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
 
     return (
         <section
-            className="relative py-32 md:py-40 text-white bg-cover bg-center overflow-hidden"
-            style={{
-                backgroundImage: "url('/product-cover.png')",
-            }}
+            ref={sectionRef}
+            className="relative py-32 md:py-40 text-white overflow-hidden"
         >
+            {/* Parallax Background Image */}
+            <motion.div 
+                className="absolute inset-0 z-0 bg-cover bg-center"
+                style={{
+                    backgroundImage: "url('/product-cover.png')",
+                    y: backgroundY,
+                    // slightly scale up to prevent edges showing during parallax bounce
+                    scale: 1.1 
+                }}
+            />
+
             {/* Layered gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70 z-0" />
 
             {/* Animated grid pattern */}
-            <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 opacity-10 z-0">
                 <div className="absolute inset-0" style={{
                     backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
                                      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -45,72 +78,50 @@ export default function ProductsHero() {
             {particles.map((style, i) => (
                 <div
                     key={i}
-                    className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
+                    className="absolute w-2 h-2 bg-blue-400/30 rounded-full z-0"
                     style={style}
                 />
             ))}
 
             {/* Glowing orbs */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse z-0" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gray-600/20 rounded-full blur-3xl animate-pulse z-0" style={{ animationDelay: '1s' }} />
 
             {/* Content */}
-            <div className="relative max-w-7xl mx-auto px-6 z-10">
-                
+            <motion.div 
+                className="relative max-w-7xl mx-auto px-6 z-10"
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+            >
                 {/* Breadcrumb */}
-                <div 
-                    className={`flex items-center gap-2 text-sm mb-6 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                >
+                <motion.div variants={itemVariants} className="flex items-center gap-2 text-sm mb-6">
                     <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors">Home</Link>
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                    <ChevronRight className="w-4 h-4 text-gray-400" strokeWidth={2} />
                     <span className="text-gray-300">Products</span>
-                </div>
+                </motion.div>
 
                 {/* Badge */}
-                <div 
-                    className={`inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 mb-6 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '100ms' }}
-                >
+                <motion.div variants={itemVariants} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 mb-6">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
                     <span className="text-sm font-semibold">Complete Product Range</span>
-                </div>
+                </motion.div>
 
                 {/* Main heading */}
-                <h1 
-                    className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '200ms' }}
-                >
+                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
                     <span className="block">Our Products</span>
                     <span className="block text-blue-400 mt-2">Precision Engineered</span>
-                </h1>
+                </motion.h1>
 
                 {/* Description */}
-                <p 
-                    className={`text-xl text-gray-200 max-w-3xl leading-relaxed mb-10 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '300ms' }}
-                >
+                <motion.p variants={itemVariants} className="text-xl text-gray-200 max-w-3xl leading-relaxed mb-10">
                     Spenta Engineers manufactures and supplies a comprehensive range of
                     precision drilling tools designed for mineral exploration, mining,
                     and geotechnical applications.
-                </p>
+                </motion.p>
 
                 {/* Features list */}
-                <div 
-                    className={`flex flex-wrap gap-6 mb-10 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '400ms' }}
-                >
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-6 mb-10">
                     {[
                         { icon: "✓", text: "6 Product Categories" },
                         { icon: "⚙️", text: "Premium Quality" },
@@ -121,42 +132,28 @@ export default function ProductsHero() {
                             <span className="text-sm font-medium">{item.text}</span>
                         </div>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* CTA Buttons */}
-                <div 
-                    className={`flex flex-wrap gap-4 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '500ms' }}
-                >
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
                     <Link
                         href="#products"
-                        className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                        className="group inline-flex items-center gap-2 bg-accent hover:bg-blue-700 px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all hover:scale-105"
                     >
                         Explore Products
-                        <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                        </svg>
+                        <ArrowDown className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
                     </Link>
                     <Link
                         href="/catalogue"
                         className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white/30 hover:border-white/50 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105"
                     >
                         Download Catalogue
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
+                        <FileDown className="w-5 h-5" strokeWidth={2} />
                     </Link>
-                </div>
+                </motion.div>
 
                 {/* Stats bar */}
-                <div 
-                    className={`mt-16 flex flex-wrap gap-8 transition-all duration-700 ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                    style={{ transitionDelay: '600ms' }}
-                >
+                <motion.div variants={itemVariants} className="mt-16 flex flex-wrap gap-8">
                     {[
                         { value: "500+", label: "Products" },
                         { value: "15+", label: "Years Experience" },
@@ -167,11 +164,11 @@ export default function ProductsHero() {
                             <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
                         </div>
                     ))}
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
 
             {/* Scroll indicator */}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
                 <div className="w-8 h-12 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
                     <div className="w-1 h-3 bg-white/70 rounded-full animate-scroll" />
                 </div>

@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Zap, ChevronRight, ArrowRight } from 'lucide-react';
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, Variants } from "framer-motion";
 
 export default function IndustriesServed() {
-  const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
 
   const industries = [
     { 
@@ -32,26 +32,27 @@ export default function IndustriesServed() {
     },
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      }
     }
+  };
 
-    return () => observer.disconnect();
-  }, []);
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
 
   return (
     <section 
-      ref={sectionRef}
       className="py-24 bg-gradient-to-br from-gray-50 to-gray-100 border-t border-gray-200 relative overflow-hidden"
     >
       {/* Background elements */}
@@ -63,37 +64,45 @@ export default function IndustriesServed() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Header */}
-        <div 
-          className={`mb-16 max-w-3xl transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          className="mb-16 max-w-3xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <p className="text-sm uppercase tracking-widest text-blue-600 mb-3 font-semibold">
+          <p className="text-sm uppercase tracking-widest text-accent mb-3 font-semibold">
             Applications
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-graphite mb-4">
             Industries We Serve
           </h2>
-          <div className="h-1 w-24 bg-blue-600 rounded-full mb-6" />
+          <div className="h-1 w-24 bg-accent rounded-full mb-6" />
           <p className="text-lg text-gray-600">
             Our drilling tools are trusted across a wide range of industrial and
             exploration applications.
           </p>
-        </div>
+        </motion.div>
 
         {/* Industries grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
           {industries.map((item, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               onMouseEnter={() => setActiveIndex(index)}
               onMouseLeave={() => setActiveIndex(null)}
               className={`group relative h-80 overflow-hidden rounded-2xl border-2 transition-all duration-700 cursor-pointer ${
                 activeIndex === index 
-                  ? 'border-blue-600 shadow-2xl scale-105' 
+                  ? 'border-accent shadow-2xl scale-105' 
                   : 'border-gray-200 shadow-lg hover:border-blue-400'
-              } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              }`}
             >
               {/* Image */}
               <Image
@@ -118,9 +127,7 @@ export default function IndustriesServed() {
                 <div className={`absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-500 ${
                   activeIndex === index ? 'scale-110 rotate-12' : 'scale-100 rotate-0'
                 }`}>
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                  <Zap className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
 
                 {/* Title */}
@@ -145,9 +152,7 @@ export default function IndustriesServed() {
                     ? 'opacity-100 translate-x-0' 
                     : 'opacity-0 translate-x-4'
                 }`}>
-                  <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  <ChevronRight className="w-5 h-5 text-graphite" strokeWidth={2} />
                 </div>
 
                 {/* Bottom accent line */}
@@ -158,24 +163,25 @@ export default function IndustriesServed() {
 
               {/* Number indicator */}
               <div className={`absolute top-6 left-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white font-bold text-lg transition-all duration-500 ${
-                activeIndex === index ? 'bg-blue-600 border-blue-400' : ''
+                activeIndex === index ? 'bg-accent border-blue-400' : ''
               }`}>
                 {index + 1}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
-        <div 
-          className={`mt-16 text-center transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '500ms' }}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="inline-flex flex-col sm:flex-row gap-4 items-center bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
             <div className="text-left">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-graphite mb-2">
                 Need industry-specific solutions?
               </h3>
               <p className="text-gray-600">
@@ -184,15 +190,13 @@ export default function IndustriesServed() {
             </div>
             <Link
               href="/industries"
-              className="flex-shrink-0 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 shadow-lg group"
+              className="flex-shrink-0 inline-flex items-center gap-2 bg-accent hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 shadow-lg group"
             >
               View All Industries
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  --color-graphite: #2A2D35;
+  --color-accent: #1B6CEF;
+  --color-accent-warm: #E65C00;
+  
+  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
 /* @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *)); */

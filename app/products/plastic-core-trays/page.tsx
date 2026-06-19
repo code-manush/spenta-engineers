@@ -1,3 +1,5 @@
+import RequestQuoteModal from "@/app/products/RequestQuoteModal";
+import AddToCartButton from "@/components/products/AddToCartButton";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -40,7 +42,7 @@ export default function PlasticCoreTraysPage() {
 
             {/* Text */}
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-graphite mb-6">
                 Designed to Protect Valuable Core Samples
               </h2>
 
@@ -77,7 +79,7 @@ export default function PlasticCoreTraysPage() {
           <div className="max-w-7xl mx-auto px-6">
 
             <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-graphite mb-4">
                 Available Core Tray Types
               </h2>
               <p className="text-lg text-gray-600">
@@ -105,7 +107,7 @@ export default function PlasticCoreTraysPage() {
                   key={i}
                   className="bg-white p-10 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all"
                 >
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                  <h3 className="text-2xl font-semibold text-graphite mb-4">
                     {item.title}
                   </h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
@@ -123,7 +125,7 @@ export default function PlasticCoreTraysPage() {
           <div className="max-w-7xl mx-auto px-6">
 
             <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-graphite mb-4">
                 Technical Highlights
               </h2>
               <p className="text-lg text-gray-600">
@@ -154,7 +156,7 @@ export default function PlasticCoreTraysPage() {
         </section>
 
         {/* CTA */}
-        <div className="bg-gray-900 text-white rounded-xl p-12 text-center">
+        <div className="bg-graphite text-white rounded-xl p-12 text-center">
           <h3 className="text-3xl font-bold mb-4">
             Need Core Tray Specifications or Bulk Supply?
           </h3>
@@ -162,12 +164,10 @@ export default function PlasticCoreTraysPage() {
             Contact our team to confirm sizes, quantities, and delivery options
             for your project.
           </p>
-          <a
-            href="/contact"
-            className="inline-block bg-white text-gray-900 px-10 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition"
-          >
-            Request a Quote
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <RequestQuoteModal productName="Product" sizes={[]} />
+            <AddToCartButton productName="Product" />
+          </div>
         </div>
 
       </div>

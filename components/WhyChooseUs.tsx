@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { ArrowRight } from 'lucide-react';
+import { useState } from "react";
+import { motion, Variants } from "framer-motion";
 
 export default function WhyChooseUs() {
-  const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
 
   const whyChoose = [
     {
@@ -30,26 +30,27 @@ export default function WhyChooseUs() {
     },
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      }
     }
+  };
 
-    return () => observer.disconnect();
-  }, []);
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
 
   return (
     <section 
-      ref={sectionRef}
       className="py-24 bg-white border-t border-gray-200 relative overflow-hidden"
     >
       {/* Background pattern */}
@@ -68,37 +69,45 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Header */}
-        <div 
-          className={`mb-16 max-w-3xl transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          className="mb-16 max-w-3xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <p className="text-sm uppercase tracking-widest text-blue-600 font-semibold mb-3">
+          <p className="text-sm uppercase tracking-widest text-accent font-semibold mb-3">
             Our Strengths
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-graphite tracking-tight mb-4">
             Why Choose Spenta Engineers
           </h2>
-          <div className="h-1 w-24 bg-blue-600 rounded-full mb-6" />
+          <div className="h-1 w-24 bg-accent rounded-full mb-6" />
           <p className="text-lg text-gray-600 leading-relaxed">
             Our approach combines engineering expertise, controlled manufacturing,
             and a strong focus on reliability to support demanding drilling operations.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
           {whyChoose.map((point, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`group relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 transition-all duration-500 ${
                 hoveredIndex === index 
-                  ? 'border-blue-600 shadow-2xl scale-[1.02] -translate-y-1' 
+                  ? 'border-accent shadow-2xl scale-[1.02] -translate-y-1' 
                   : 'border-gray-200 shadow-md hover:border-blue-300'
-              } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              }`}
             >
               {/* Animated background effect */}
               <div className={`absolute inset-0 bg-blue-50 rounded-2xl transition-opacity duration-500 ${
@@ -108,7 +117,7 @@ export default function WhyChooseUs() {
               {/* Content */}
               <div className="relative flex items-start gap-6">
                 {/* Icon */}
-                <div className={`flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg transition-all duration-500 ${
+                <div className={`flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-accent to-blue-700 flex items-center justify-center shadow-lg transition-all duration-500 ${
                   hoveredIndex === index ? 'scale-110 rotate-6' : 'scale-100 rotate-0'
                 }`}>
                   <span className="text-2xl font-bold text-white">{index + 1}</span>
@@ -116,7 +125,7 @@ export default function WhyChooseUs() {
 
                 {/* Text */}
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-graphite mb-3 leading-tight group-hover:text-accent transition-colors">
                     {point.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -126,40 +135,39 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Corner accent */}
-              <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-600/10 to-transparent rounded-bl-full transition-opacity duration-500 ${
+              <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/10 to-transparent rounded-bl-full transition-opacity duration-500 ${
                 hoveredIndex === index ? 'opacity-100' : 'opacity-0'
               }`} />
 
               {/* Bottom line indicator */}
-              <div className={`absolute bottom-0 left-0 h-1 bg-blue-600 rounded-full transition-all duration-500 ${
+              <div className={`absolute bottom-0 left-0 h-1 bg-accent rounded-full transition-all duration-500 ${
                 hoveredIndex === index ? 'w-full' : 'w-0'
               }`} />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
-        <div 
-          className={`mt-16 text-center transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '600ms' }}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="inline-block p-8 bg-gradient-to-r from-gray-900 to-blue-900 rounded-2xl shadow-2xl">
+          <div className="inline-block p-8 bg-gradient-to-r from-graphite to-blue-900 rounded-2xl shadow-2xl">
             <p className="text-white text-lg mb-4">
               Ready to experience the Spenta Engineers difference?
             </p>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white hover:bg-blue-50 text-gray-900 px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg group"
+              className="inline-flex items-center gap-2 bg-white hover:bg-blue-50 text-graphite px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-lg group"
             >
               Get Started Today
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <style jsx>{`

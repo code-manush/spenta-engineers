@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, useInView, Variants } from "framer-motion";
 
 export default function ManufacturingQuality() {
-  const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const features = [
     {
@@ -30,30 +31,50 @@ export default function ManufacturingQuality() {
   ];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (isVisible) {
+    if (isInView) {
       const interval = setInterval(() => {
         setActiveTab((prev) => (prev + 1) % features.length);
       }, 4000);
       return () => clearInterval(interval);
     }
-  }, [isVisible, features.length]);
+  }, [isInView, features.length]);
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const slideRightVariants: Variants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const slideLeftVariants: Variants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
 
   return (
     <section 
@@ -75,38 +96,40 @@ export default function ManufacturingQuality() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Header */}
-        <div 
-          className={`mb-16 max-w-3xl transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div 
+          className="mb-16 max-w-3xl"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={itemVariants}
         >
-          <p className="text-sm uppercase tracking-widest text-blue-600 mb-3 font-semibold">
+          <p className="text-sm uppercase tracking-widest text-accent mb-3 font-semibold">
             Manufacturing & Quality
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+          <h2 className="text-4xl md:text-5xl font-bold text-graphite mb-3">
             Built with Precision.
           </h2>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-graphite mb-4">
             Tested for Reliability.
           </h2>
-          <div className="h-1 w-24 bg-blue-600 rounded-full mb-6" />
+          <div className="h-1 w-24 bg-accent rounded-full mb-6" />
           <p className="text-lg text-gray-600">
             Our manufacturing processes and quality practices are focused on delivering
             drilling tools that perform consistently in demanding field conditions.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Image with overlay */}
-          <div 
-            className={`relative transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-            }`}
+          <motion.div 
+            className="relative"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={slideRightVariants}
           >
             <div className="relative group">
               {/* Decorative border */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-gray-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-accent to-gray-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity" />
               
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200">
                 <Image
@@ -123,24 +146,24 @@ export default function ManufacturingQuality() {
                 {/* Quality badge */}
                 <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                  <span className="font-bold text-gray-900 text-sm">Quality Assured</span>
+                  <span className="font-bold text-graphite text-sm">Quality Assured</span>
                 </div>
 
                 {/* Bottom info card */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="font-bold text-gray-900 mb-1">ISO Certified Facility</p>
+                  <p className="font-bold text-graphite mb-1">ISO Certified Facility</p>
                   <p className="text-sm text-gray-600">State-of-the-art manufacturing infrastructure</p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Features tabs */}
-          <div 
-            className={`space-y-6 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}
-            style={{ transitionDelay: '200ms' }}
+          <motion.div 
+            className="space-y-6"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={slideLeftVariants}
           >
             {features.map((feature, index) => (
               <div
@@ -148,12 +171,12 @@ export default function ManufacturingQuality() {
                 onClick={() => setActiveTab(index)}
                 className={`relative p-6 rounded-2xl cursor-pointer transition-all duration-500 ${
                   activeTab === index 
-                    ? 'bg-white shadow-2xl border-2 border-blue-600 scale-[1.02]' 
+                    ? 'bg-white shadow-2xl border-2 border-accent scale-[1.02]' 
                     : 'bg-white/50 shadow-md border-2 border-gray-200 hover:border-blue-300'
                 }`}
               >
                 {/* Active indicator */}
-                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-full transition-all duration-500 ${
+                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-accent rounded-r-full transition-all duration-500 ${
                   activeTab === index ? 'opacity-100' : 'opacity-0'
                 }`} />
 
@@ -161,7 +184,7 @@ export default function ManufacturingQuality() {
                   {/* Icon */}
                   <div className={`flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br flex items-center justify-center shadow-lg transition-all duration-500 ${
                     activeTab === index 
-                      ? 'from-blue-600 to-blue-700 scale-110 rotate-6' 
+                      ? 'from-accent to-blue-700 scale-110 rotate-6' 
                       : 'from-gray-600 to-gray-700 scale-100'
                   }`}>
                     <span className="text-2xl">{feature.icon}</span>
@@ -171,7 +194,7 @@ export default function ManufacturingQuality() {
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className={`text-xl font-bold transition-colors ${
-                        activeTab === index ? 'text-blue-600' : 'text-gray-900'
+                        activeTab === index ? 'text-accent' : 'text-graphite'
                       }`}>
                         {feature.title}
                       </h3>
@@ -194,20 +217,20 @@ export default function ManufacturingQuality() {
                 {/* Progress bar */}
                 {activeTab === index && (
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100 rounded-b-2xl overflow-hidden">
-                    <div className="h-full bg-blue-600 animate-progress" />
+                    <div className="h-full bg-accent animate-progress" />
                   </div>
                 )}
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Stats bar */}
-        <div 
-          className={`mt-16 grid grid-cols-1 md:grid-cols-4 gap-6 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '400ms' }}
+        <motion.div 
+          className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-6"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
         >
           {[
             { label: "Quality Control Points", value: "50+", icon: "✓" },
@@ -215,16 +238,17 @@ export default function ManufacturingQuality() {
             { label: "Manufacturing Precision", value: "±0.01mm", icon: "📏" },
             { label: "Customer Satisfaction", value: "100%", icon: "⭐" }
           ].map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:border-blue-600 transition-all hover:scale-105 text-center group"
+              variants={itemVariants}
+              className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:border-accent transition-all hover:scale-105 text-center group"
             >
               <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">{stat.icon}</div>
-              <div className="text-3xl font-bold text-blue-600 mb-1">{stat.value}</div>
+              <div className="text-3xl font-bold text-accent mb-1">{stat.value}</div>
               <div className="text-sm text-gray-600">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <style jsx>{`

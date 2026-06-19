@@ -1,8 +1,9 @@
 "use client";
 
+import { ArrowDown } from 'lucide-react';
 import { useState, useEffect, useRef } from "react";
-
 import Image from "next/image";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
@@ -35,6 +36,16 @@ export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Background parallax: moves down 50% relative to scroll
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacityFade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   useEffect(() => {
     const timer = setTimeout(
@@ -63,7 +74,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black">
+    <section ref={sectionRef} className="relative w-full h-screen overflow-hidden bg-black">
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20 animate-gradient-shift z-[1]" />
       
@@ -83,87 +94,121 @@ export default function Hero() {
         />
       </div>
 
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 scale-105"
-          }`}
-        >
-          {slide.type === "video" && (
-            <video
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
-              src={slide.video}
-              muted
-              autoPlay
-              playsInline
-              preload="metadata"
-              poster="hero-poster.jpg"
-            />
-          )}
-
-          {slide.type === "image" && slide.image && (
-            <Image
-              src={slide.image}
-              fill
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[8000ms]"
-              style={{ transform: index === currentSlide ? 'scale(1.1)' : 'scale(1)' }}
-              alt=""
-            />
-          )}
-
-          {/* Dark overlay with gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-[5]" />
-
-          <div className="relative z-20 flex items-center h-full px-6 md:px-12">
-            <div className="w-full md:w-1/2 text-white space-y-6">
-              <p 
-                className={`text-sm uppercase tracking-wider text-blue-400 font-semibold transition-all duration-700 ${
-                  index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: '200ms' }}
+      <AnimatePresence mode="popLayout">
+        {slides.map((slide, index) => {
+          if (index !== currentSlide) return null;
+          
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0 z-10"
+              style={{ opacity: opacityFade }}
+            >
+              {/* Parallax layer for media */}
+              <motion.div 
+                className="absolute inset-0 w-full h-full"
+                style={{ y: backgroundY, scale: 1.1 }}
               >
-                {slide.eyebrow}
-              </p>
-              <h1 
-                className={`text-4xl md:text-6xl font-bold leading-tight transition-all duration-700 ${
-                  index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: '400ms' }}
-              >
-                {slide.headline.split(' ').map((word, i) => (
-                  <span 
-                    key={i}
-                    className="inline-block animate-fade-in-word mr-4"
-                    style={{ animationDelay: `${i * 100}ms` }}
+                {slide.type === "video" && (
+                  <video
+                    ref={videoRef}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src={slide.video}
+                    muted
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                    poster="hero-poster.jpg"
+                  />
+                )}
+
+                {slide.type === "image" && slide.image && (
+                  <Image
+                    src={slide.image}
+                    fill
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt=""
+                    priority={index === 0}
+                  />
+                )}
+              </motion.div>
+
+              {/* Dark overlay with gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-[5]" />
+
+              {/* Slide Content */}
+              <div className="relative z-20 flex items-center h-full px-6 md:px-12">
+                <motion.div 
+                  className="w-full md:w-1/2 text-white space-y-6"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                    }
+                  }}
+                >
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                    className="text-sm uppercase tracking-wider text-blue-400 font-semibold"
                   >
-                    {word}{' '}
-                  </span>
-                ))}
-              </h1>
-              <p 
-                className={`text-lg text-gray-200 max-w-lg leading-relaxed transition-all duration-700 ${
-                  index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: '600ms' }}
-              >
-                {slide.supporting}
-              </p>
-              <div 
-                className={`flex gap-4 transition-all duration-700 ${
-                  index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-                style={{ transitionDelay: '800ms' }}
-              >
-                <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50" onClick={() => window.location.href = '/products/core-trays'}>
-                  Explore Products
-                </button>
+                    {slide.eyebrow}
+                  </motion.p>
+                  
+                  <motion.h1 
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                    className="text-4xl md:text-6xl font-bold leading-tight"
+                  >
+                    {slide.headline.split(' ').map((word, i) => (
+                      <span 
+                        key={i}
+                        className="inline-block animate-fade-in-word mr-4"
+                        style={{ animationDelay: `${i * 100}ms` }}
+                      >
+                        {word}{' '}
+                      </span>
+                    ))}
+                  </motion.h1>
+                  
+                  <motion.p 
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                    className="text-lg text-gray-200 max-w-lg leading-relaxed"
+                  >
+                    {slide.supporting}
+                  </motion.p>
+                  
+                  <motion.div 
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                    className="flex gap-4"
+                  >
+                    <button className="bg-accent hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50" onClick={() => window.location.href = '/products/core-trays'}>
+                      Explore Products
+                    </button>
+                  </motion.div>
+                </motion.div>
               </div>
-            </div>
-          </div>
-        </div>
-      ))}
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
 
       {/* Slide indicators */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 flex gap-3">
@@ -182,9 +227,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 right-10 z-30 animate-bounce">
-        <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+        <ArrowDown className="w-6 h-6 text-white/70" strokeWidth={2} />
       </div>
 
       <style jsx>{`
