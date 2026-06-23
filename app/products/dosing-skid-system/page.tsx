@@ -24,7 +24,6 @@ export default function DosingSkidSystemPage() {
 
   const images = [
     { src: "/dosing-skid.png", alt: "Dosing Skid System Overview" },
-    { src: "/dosing-skid-2.png", alt: "Precision Dosing Pumps" },
     { src: "/dosing-skid-3.png", alt: "Storage and Mixing Tank" }
   ];
 
