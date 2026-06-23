@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Wrench, Cpu, Box, Star, Settings, Building2, ArrowRight } from 'lucide-react';
+import { Wrench, Cpu, Box, Star, Settings, Building2, ArrowRight, Droplets } from 'lucide-react';
 
 export default function ProductCategoriesGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -61,6 +61,15 @@ export default function ProductCategoriesGrid() {
       image: "/drill-rig.jpg",
       icon: (
         <Building2 className="w-6 h-6" strokeWidth={2} />
+      )
+    },
+    {
+      name: "Dosing Skid System",
+      slug: "dosing-skid-system",
+      description: "Pre-assembled chemical injection skids with precision dosing pumps and full instrumentation.",
+      image: "/dosing-skid.jpg",
+      icon: (
+        <Droplets className="w-6 h-6" strokeWidth={2} />
       )
     }
   ];

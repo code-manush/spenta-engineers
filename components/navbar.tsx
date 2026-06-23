@@ -104,6 +104,10 @@ const Navbar = () => {
                                                 <Link href="/products/diamond-tungsten-tools" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
                                                     <div className="font-medium">Diamond and Carbide Tools</div>
                                                 </Link>
+                                                <div className="h-px bg-gray-200 mx-4" />
+                                                <Link href="/products/dosing-skid-system" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
+                                                    <div className="font-medium">Dosing Skid System</div>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +127,7 @@ const Navbar = () => {
 
                     {/* CTA BUTTON & CART */}
                     <div className="hidden lg:flex items-center gap-4">
-                        <button 
+                        <button
                             onClick={() => setIsCartOpen(true)}
                             className={`p-2 rounded-full transition-all relative ${isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'}`}
                         >
@@ -142,7 +146,7 @@ const Navbar = () => {
 
                     {/* MOBILE TOGGLE & CART */}
                     <div className="lg:hidden flex items-center gap-2">
-                        <button 
+                        <button
                             onClick={() => setIsCartOpen(true)}
                             className={`p-2 rounded-full transition-all relative ${isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'}`}
                         >
@@ -190,6 +194,9 @@ const Navbar = () => {
                                                     </Link>
                                                     <Link href="/products/diamond-tungsten-tools" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
                                                         Diamond and Carbide Tools
+                                                    </Link>
+                                                    <Link href="/products/dosing-skid-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
+                                                        Dosing Skid System
                                                     </Link>
                                                 </div>
                                             </div>

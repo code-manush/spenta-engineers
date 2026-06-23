@@ -32,6 +32,12 @@ export default function ProductCategories() {
       description: "Robust and reliable drill rigs designed for mineral exploration.",
       image: "/products/10.png",
       link: "/products/drill-rigs",
+    },
+    {
+      name: "Dosing Skid System",
+      description: "Turnkey chemical injection skids for water treatment, oil & gas, and chemical industries.",
+      image: "/dosing-skid.png",
+      link: "/products/dosing-skid-system",
     }
   ];
 
@@ -78,14 +84,14 @@ export default function ProductCategories() {
             >
               {/* Animated gradient border */}
               <div className={`absolute inset-0 bg-gradient-to-br from-black to-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl`} />
-              
+
               {/* Card content */}
               <div className="relative bg-white rounded-2xl p-6 h-full">
                 {/* Number badge */}
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br from-black to-gray-600 to-black
                   flex items-center justify-center mb-4 shadow-lg
                   transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                  <span className="text-2xl text-white font-bold">{index+1}</span>
+                  <span className="text-2xl text-white font-bold">{index + 1}</span>
                 </div>
 
                 {/* Image with zoom effect */}
