@@ -2,16 +2,35 @@
 
 @theme {
   --color-graphite: #2A2D35;
-  --color-accent: #1B6CEF;
+  --color-accent: #0A878A;
   --color-accent-warm: #E65C00;
-  
+
+  /* Override all blues with Teal (#0A878A) scale */
+  --color-blue-50: #e8f5f5;
+  --color-blue-100: #c4e5e5;
+  --color-blue-200: #91cecf;
+  --color-blue-300: #54afb1;
+  --color-blue-400: #299395;
+  --color-blue-500: #0A878A;
+  --color-blue-600: #076d71;
+  --color-blue-700: #07575b;
+  --color-blue-800: #084649;
+  --color-blue-900: #0a3a3e;
+  --color-blue-950: #042528;
+
   --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-space), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
   }
 }

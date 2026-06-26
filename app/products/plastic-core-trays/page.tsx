@@ -1,176 +1,84 @@
-import RequestQuoteModal from "@/app/products/RequestQuoteModal";
-import AddToCartButton from "@/components/products/AddToCartButton";
-import type { Metadata } from "next";
-import Image from "next/image";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Plastic Core Trays & Boxes",
-  description:
-    "Durable plastic core trays and boxes designed for safe storage and transport of core samples.",
-};
+import ProductHero from "@/components/products/ui/ProductHero";
+import ProductStickyScroll from "@/components/products/ui/ProductStickyScroll";
+import ProductVariantsCarousel from "@/components/products/ui/ProductVariantsCarousel";
+import ProductFeatures from "@/components/products/ui/ProductFeatures";
+import ProductCTA from "@/components/products/ui/ProductCTA";
+import { Link, ShieldCheck, Factory, Gauge } from "lucide-react";
 
 export default function PlasticCoreTraysPage() {
-  return (
-    <section className="py-0 bg-white">
-      <div className="mx-auto px-0">
+    return (
+        <main className="bg-white dark:bg-gray-950 transition-colors duration-300">
+            <ProductHero 
+                title="Plastic Core Trays & Boxes"
+                description="Durable plastic core trays and boxes designed for safe storage and transport of core samples."
+                breadcrumbs={[
+                    { label: "Home", href: "/" },
+                    { label: "Products", href: "/products" },
+                    { label: "Plastic Core Trays", href: "/products/plastic-core-trays" },
+                ]}
+            />
 
-        {/* Hero */}
-        <section
-          className="relative py-50 text-white bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/core-tray.webp')",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/80"></div>
+            <ProductStickyScroll 
+                image="/core-tray.webp"
+                sections={[
+                    {
+                        title: "Designed to Protect Valuable Samples",
+                        content: "Proper core handling and storage are critical to maintaining geological data integrity. Our plastic core trays are designed to securely hold core samples while minimizing damage during transport and field handling."
+                    },
+                    {
+                        title: "High-Quality Materials",
+                        content: "Manufactured using high-quality plastic materials, these trays offer excellent impact resistance, dimensional stability, and long service life under demanding site conditions."
+                    }
+                ]}
+            />
 
-          <div className="relative max-w-7xl mx-auto px-6">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-normal">
-              Plastic Core Trays & Boxes
-            </h1>
+            <ProductVariantsCarousel 
+                title="Available Core Tray Types"
+                description="Our plastic core trays are available in standard sizes to accommodate different core diameters and storage requirements."
+                variants={[
+                    {
+                        title: "BQ Core Trays",
+                        description: "Designed for compact core samples used in shallow and exploratory drilling.",
+                    },
+                    {
+                        title: "NQ Core Trays",
+                        description: "Standard trays suitable for most mineral exploration applications.",
+                    },
+                    {
+                        title: "HQ / PQ Core Trays",
+                        description: "Larger trays designed for high-capacity core storage and handling.",
+                    }
+                ]}
+            />
 
-            <p className="text-xl text-gray-200 max-w-3xl leading-relaxed">
-              Spenta Engineers supplies durable plastic core trays and boxes
-              designed to ensure safe handling, organized storage, and secure
-              transportation of drilled core samples.
-            </p>
-          </div>
-        </section>
+            <ProductFeatures 
+                title="Technical Highlights"
+                features={[
+                    {
+                        title: "Durable Construction",
+                        description: "High-impact, durable plastic construction that is lightweight yet robust.",
+                        icon: ShieldCheck
+                    },
+                    {
+                        title: "Organized Logging",
+                        description: "Consistent dimensions for organized core logging and stackable for efficient storage and transport.",
+                        icon: Gauge
+                    },
+                    {
+                        title: "Field Ready",
+                        description: "Weather-resistant for field conditions, with easy cleaning and reuse capabilities.",
+                        icon: Factory
+                    }
+                ]}
+            />
 
-        {/* Engineering Overview */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Text */}
-            <div>
-              <h2 className="text-4xl font-bold text-graphite mb-6">
-                Designed to Protect Valuable Core Samples
-              </h2>
-
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Proper core handling and storage are critical to maintaining
-                geological data integrity. Our plastic core trays are designed
-                to securely hold core samples while minimizing damage during
-                transport and field handling.
-              </p>
-
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Manufactured using high-quality plastic materials, these trays
-                offer excellent impact resistance, dimensional stability, and
-                long service life under demanding site conditions.
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className="relative">
-              <Image
-                src="/core-tray-detail.jpg"
-                alt="Plastic Core Tray Construction Detail"
-                width={600}
-                height={420}
-                className="w-full h-[420px] object-cover rounded-xl border border-gray-200 shadow-lg"
-              />
-            </div>
-
-          </div>
-        </section>
-
-        {/* Variants */}
-        <section className="py-24 bg-gray-100 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-6">
-
-            <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-graphite mb-4">
-                Available Core Tray Types
-              </h2>
-              <p className="text-lg text-gray-600">
-                Our plastic core trays are available in standard sizes to
-                accommodate different core diameters and storage requirements.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {[
-                {
-                  title: "BQ Core Trays",
-                  desc: "Designed for compact core samples used in shallow and exploratory drilling.",
-                },
-                {
-                  title: "NQ Core Trays",
-                  desc: "Standard trays suitable for most mineral exploration applications.",
-                },
-                {
-                  title: "HQ / PQ Core Trays",
-                  desc: "Larger trays designed for high-capacity core storage and handling.",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-10 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all"
-                >
-                  <h3 className="text-2xl font-semibold text-graphite mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* Technical Highlights */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-
-            <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-graphite mb-4">
-                Technical Highlights
-              </h2>
-              <p className="text-lg text-gray-600">
-                Features designed for durability, organization, and ease of handling.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {[
-                "High-impact, durable plastic construction",
-                "Consistent dimensions for organized core logging",
-                "Lightweight yet robust design",
-                "Stackable for efficient storage and transport",
-                "Weather-resistant for field conditions",
-                "Easy cleaning and reuse",
-              ].map((point, index) => (
-                <div
-                  key={index}
-                  className="flex items-start p-6 bg-gray-50 border border-gray-200 rounded-lg"
-                >
-                  <span className="text-blue-900 text-xl font-bold mr-4">✓</span>
-                  <p className="text-lg text-gray-700">{point}</p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* CTA */}
-        <div className="bg-graphite text-white rounded-xl p-12 text-center">
-          <h3 className="text-3xl font-bold mb-4">
-            Need Core Tray Specifications or Bulk Supply?
-          </h3>
-          <p className="text-lg text-gray-300 mb-8">
-            Contact our team to confirm sizes, quantities, and delivery options
-            for your project.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <RequestQuoteModal productName="Product" sizes={[]} />
-            <AddToCartButton productName="Product" />
-          </div>
-        </div>
-
-      </div>
-    </section>
-  );
+            <ProductCTA 
+                title="Need Core Tray Specifications or Bulk Supply?"
+                description="Contact our team to confirm sizes, quantities, and delivery options for your project."
+                productName="Plastic Core Trays & Boxes"
+            />
+        </main>
+    );
 }

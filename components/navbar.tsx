@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Menu, X, ShoppingCart } from 'lucide-react';
+import { ChevronDown, Menu, X, ShoppingCart, Box, Target, Settings, Shield, Droplets, ArrowRight } from 'lucide-react';
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showProductsDropdown, setShowProductsDropdown] = useState(false);
+    const [hoveredProductIndex, setHoveredProductIndex] = useState(0);
 
     const router = useRouter();
     const pathname = usePathname();
@@ -25,8 +26,46 @@ const Navbar = () => {
         { name: "Contact", path: "/contact" },
     ];
 
+    const productCategories = [
+        {
+            name: "Core Trays and Boxes",
+            path: "/products/core-trays",
+            icon: Box,
+            description: "Durable plastic solutions for core sample storage.",
+            image: "/products/12.png"
+        },
+        {
+            name: "Core Drilling System",
+            path: "/products/core-drilling-system",
+            icon: Target,
+            description: "High-performance drilling systems & accessories.",
+            image: "/products/14.png"
+        },
+        {
+            name: "Drilling Rigs",
+            path: "/products/drill-rigs",
+            icon: Settings,
+            description: "Robust and reliable drill rigs for exploration.",
+            image: "/products/10.png"
+        },
+        {
+            name: "Diamond & Carbide Tools",
+            path: "/products/diamond-tungsten-tools",
+            icon: Shield,
+            description: "Advanced cutting tools for mineral exploration.",
+            image: "/products/11.png"
+        },
+        {
+            name: "Dosing Skid System",
+            path: "/products/dosing-skid-system",
+            icon: Droplets,
+            description: "Turnkey chemical injection skids for water treatment.",
+            image: "/dosing-skid.png"
+        },
+    ];
+
     useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 10);
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -40,25 +79,24 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="fixed top-0 left-0 w-full z-50 px-3 sm:px-4 md:px-6 lg:px-8 pt-4 md:pt-5 lg:pt-6">
+            {/* The Floating Pill Wrapper */}
+            <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out ${isScrolled ? "pt-4 px-4 sm:px-6" : "pt-0 px-0"}`}>
                 <nav
-                    className={`mx-auto max-w-7xl px-4 sm:px-5 lg:px-6 rounded-2xl lg:rounded-3xl 
-                    flex items-center justify-between gap-2 lg:gap-3
-                    transition-all duration-500 ease-out
+                    className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-500 ease-out
                     ${isScrolled
-                            ? "bg-white/80 backdrop-blur-2xl shadow-2xl py-0 lg:py-0 border border-white/20"
-                            : "bg-black/20 backdrop-blur-md py-0 lg:py-0 shadow-lg border border-white/10"
+                            ? "bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-2xl sm:rounded-full px-4 sm:px-6 py-2 border border-gray-100"
+                            : "bg-gradient-to-b from-black/60 to-transparent backdrop-blur-[2px] px-6 lg:px-10 py-4"
                         }`}
                 >
                     {/* LOGO */}
                     <Link href="/" className="flex items-center shrink-0 transition-transform duration-300 hover:scale-105">
-                        <div className="relative h-16 sm:h-18 md:h-20 lg:h-24 xl:h-28">
+                        <div className={`relative transition-all duration-500 ${isScrolled ? "h-12 sm:h-14" : "h-16 sm:h-20"}`}>
                             <Image
                                 src={isScrolled ? "/logo.png" : "/logo-white.png"}
                                 alt="Spenta Engineers"
                                 width={240}
                                 height={140}
-                                className="h-16 sm:h-18 md:h-20 lg:h-24 xl:h-28 w-auto object-contain transition-all duration-500"
+                                className="h-full w-auto object-contain"
                                 priority
                             />
                         </div>
@@ -71,43 +109,109 @@ const Navbar = () => {
                                 return (
                                     <div
                                         key={i}
-                                        className="relative"
+                                        className="relative group"
                                         onMouseEnter={() => setShowProductsDropdown(true)}
-                                        onMouseLeave={() => setShowProductsDropdown(false)}
+                                        onMouseLeave={() => {
+                                            setShowProductsDropdown(false);
+                                            // Reset to first item when menu closes after a short delay
+                                            setTimeout(() => setHoveredProductIndex(0), 300);
+                                        }}
                                     >
                                         <Link
                                             href={link.path}
-                                            className={`relative font-medium transition-colors duration-300 flex items-center gap-1 ${pathname === link.path ? (isScrolled ? "text-accent" : "text-white") : (isScrolled ? "text-gray-700 hover:text-accent" : "text-white/90 hover:text-white")}`}
+                                            className={`relative font-semibold text-sm tracking-wide transition-colors duration-300 flex items-center gap-1 py-4 
+                                                ${pathname.includes('/products')
+                                                    ? (isScrolled ? "text-blue-600" : "text-white")
+                                                    : (isScrolled ? "text-gray-800 hover:text-blue-600" : "text-white/90 hover:text-white")}`}
                                         >
                                             <span className="relative">
                                                 {link.name}
-                                                <span className={`absolute left-0 -bottom-1 h-px w-full transition-all duration-300 ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} ${isScrolled ? "bg-accent" : "bg-white"}`} />
+                                                <span className={`absolute left-0 -bottom-1 h-0.5 w-full transition-all duration-300 ${pathname.includes('/products') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} ${isScrolled ? "bg-blue-600" : "bg-white"}`} />
                                             </span>
                                             <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showProductsDropdown ? 'rotate-180' : ''}`} />
                                         </Link>
 
-                                        {/* Dropdown */}
-                                        <div className={`absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 shadow-2xl overflow-hidden transition-all duration-300 ${showProductsDropdown ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                                            <div className="py-2">
-                                                <Link href="/products/core-trays" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
-                                                    <div className="font-medium">Core Trays and Boxes</div>
-                                                </Link>
-                                                <div className="h-px bg-gray-200 mx-4" />
-                                                <Link href="/products/core-drilling-system" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
-                                                    <div className="font-medium">Core Drilling System</div>
-                                                </Link>
-                                                <div className="h-px bg-gray-200 mx-4" />
-                                                <Link href="/products/drill-rigs" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
-                                                    <div className="font-medium">Drilling Rigs</div>
-                                                </Link>
-                                                <div className="h-px bg-gray-200 mx-4" />
-                                                <Link href="/products/diamond-tungsten-tools" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
-                                                    <div className="font-medium">Diamond and Carbide Tools</div>
-                                                </Link>
-                                                <div className="h-px bg-gray-200 mx-4" />
-                                                <Link href="/products/dosing-skid-system" className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-accent transition-colors">
-                                                    <div className="font-medium">Dosing Skid System</div>
-                                                </Link>
+                                        {/* Premium Bento Mega-Menu Dropdown */}
+                                        <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[680px] transition-all duration-400 origin-top ${showProductsDropdown ? 'opacity-100 visible translate-y-0 scale-y-100' : 'opacity-0 invisible -translate-y-4 scale-y-95'}`}>
+                                            <div className="bg-white/95 backdrop-blur-3xl rounded-3xl border border-gray-100/50 shadow-[0_40px_80px_rgba(0,0,0,0.15)] overflow-hidden flex min-h-[320px]">
+
+                                                {/* Left Column: Categories (Light) */}
+                                                <div className="w-[300px] p-3 flex flex-col gap-1 z-10 relative bg-white/90 backdrop-blur-md">
+                                                    {productCategories.map((category, idx) => {
+                                                        const Icon = category.icon;
+                                                        const isHovered = hoveredProductIndex === idx;
+                                                        return (
+                                                            <Link
+                                                                key={idx}
+                                                                href={category.path}
+                                                                onMouseEnter={() => setHoveredProductIndex(idx)}
+                                                                className={`flex items-start gap-3 p-3 rounded-2xl transition-all duration-300 group/item relative overflow-hidden ${isHovered ? 'bg-blue-50/50 shadow-sm border border-blue-100' : 'hover:bg-gray-50 border border-transparent'}`}
+                                                            >
+                                                                {/* Hover Accent Line */}
+                                                                <div className={`absolute left-0 top-0 bottom-0 w-1 bg-blue-600 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+
+                                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 relative z-10 ${isHovered ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 scale-105' : 'bg-gray-100 text-gray-500 group-hover/item:text-blue-600'}`}>
+                                                                    <Icon className="w-4 h-4" />
+                                                                </div>
+                                                                <div className="relative z-10 mt-0.5">
+                                                                    <div className={`font-bold text-sm transition-colors ${isHovered ? 'text-blue-700' : 'text-gray-900'}`}>
+                                                                        {category.name}
+                                                                    </div>
+                                                                    <div className="text-[11px] text-gray-500 mt-1 leading-relaxed pr-2 line-clamp-1">
+                                                                        {category.description}
+                                                                    </div>
+                                                                </div>
+                                                            </Link>
+                                                        );
+                                                    })}
+                                                </div>
+
+                                                {/* Right Column: Featured Image Preview (Dark Mode Contrast & Edge-to-Edge Fill) */}
+                                                <div className="flex-1 bg-gray-950 relative overflow-hidden group/preview block border-l border-gray-900">
+                                                    {/* Subtle grid pattern in the dark background */}
+                                                    <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
+                                                    {productCategories.map((category, idx) => (
+                                                        <div
+                                                            key={idx}
+                                                            className={`absolute inset-0 flex flex-col transition-all duration-500 ${hoveredProductIndex === idx ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 translate-x-12 -z-10'}`}
+                                                        >
+                                                            {/* Background Watermark */}
+                                                            <div className="absolute top-4 right-5 text-[70px] font-black text-white/[0.05] pointer-events-none select-none tracking-tighter z-20">
+                                                                0{idx + 1}
+                                                            </div>
+
+                                                            {/* Edge-to-Edge Image Cover */}
+                                                            <div className="absolute inset-0 z-10 opacity-70 mix-blend-screen group-hover/preview:opacity-90 transition-opacity duration-500">
+                                                                <Image
+                                                                    src={category.image}
+                                                                    alt={category.name}
+                                                                    fill
+                                                                    className={`object-cover object-center transition-transform duration-700 ease-out ${hoveredProductIndex === idx ? 'scale-105 hover:scale-110' : 'scale-90'}`}
+                                                                />
+                                                            </div>
+
+                                                            {/* Dark gradient overlay so the text remains perfectly readable */}
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent z-20" />
+
+                                                            {/* Text Content overlaying the image */}
+                                                            <div className="absolute bottom-6 left-6 right-6 z-30">
+                                                                <div className="flex items-end justify-between gap-3">
+                                                                    <div>
+                                                                        <div className="text-blue-400 font-bold tracking-widest text-[9px] uppercase mb-1">Featured</div>
+                                                                        <h4 className="font-black text-lg text-white leading-tight drop-shadow-md">{category.name}</h4>
+                                                                    </div>
+                                                                    <Link
+                                                                        href={category.path}
+                                                                        className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition-all duration-300 hover:scale-110 shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                                                                    >
+                                                                        <ArrowRight className="w-4 h-4" />
+                                                                    </Link>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -115,10 +219,10 @@ const Navbar = () => {
                             }
 
                             return (
-                                <Link key={i} href={link.path} className={`relative font-medium transition-colors duration-300 ${pathname === link.path ? (isScrolled ? "text-accent" : "text-white") : (isScrolled ? "text-gray-700 hover:text-accent" : "text-white/90 hover:text-white")}`}>
+                                <Link key={i} href={link.path} className={`relative font-semibold text-sm tracking-wide py-4 transition-colors duration-300 ${pathname === link.path ? (isScrolled ? "text-blue-600" : "text-white") : (isScrolled ? "text-gray-800 hover:text-blue-600" : "text-white/90 hover:text-white")}`}>
                                     <span className="relative">
                                         {link.name}
-                                        <span className={`absolute left-0 -bottom-1 h-px w-full transition-all duration-300 ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} ${isScrolled ? "bg-accent" : "bg-white"}`} />
+                                        <span className={`absolute left-0 -bottom-1 h-0.5 w-full transition-all duration-300 ${pathname === link.path ? 'scale-x-100' : 'scale-x-0 hover:scale-x-100'} ${isScrolled ? "bg-blue-600" : "bg-white"}`} />
                                     </span>
                                 </Link>
                             );
@@ -126,39 +230,41 @@ const Navbar = () => {
                     </div>
 
                     {/* CTA BUTTON & CART */}
-                    <div className="hidden lg:flex items-center gap-4">
+                    <div className="hidden lg:flex items-center gap-5">
+                        {/* Cart */}
                         <button
                             onClick={() => setIsCartOpen(true)}
-                            className={`p-2 rounded-full transition-all relative ${isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'}`}
+                            className={`p-2 rounded-full transition-all relative group flex items-center justify-center ${isScrolled ? 'text-gray-800 hover:bg-gray-100 hover:text-blue-600' : 'text-white hover:bg-white/20'}`}
                         >
-                            <ShoppingCart className="w-6 h-6" />
+                            <ShoppingCart className="w-6 h-6 transition-transform group-hover:scale-110" />
                             {items.length > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
+                                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
                                     {items.length}
                                 </span>
                             )}
                         </button>
-                        <button onClick={() => router.push("/contact")} className={`px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl relative overflow-hidden group ${isScrolled ? "bg-yellow-500 hover:bg-yellow-600 text-white" : "bg-yellow-400 hover:bg-yellow-500 text-graphite"}`}>
-                            <span className="relative z-10">Request a Quote</span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                        {/* Request Quote Button */}
+                        <button onClick={() => router.push("/contact")} className={`px-7 py-3.5 rounded-full font-bold tracking-wide transition-all duration-300 hover:scale-105 shadow-xl relative overflow-hidden group ${isScrolled ? "bg-black text-white hover:bg-blue-600 hover:shadow-blue-500/30" : "bg-white text-black hover:bg-blue-600 hover:text-white hover:shadow-blue-500/40"}`}>
+                            <span className="relative z-10 flex items-center gap-2">Request a Quote</span>
                         </button>
                     </div>
 
                     {/* MOBILE TOGGLE & CART */}
-                    <div className="lg:hidden flex items-center gap-2">
+                    <div className="lg:hidden flex items-center gap-3">
                         <button
                             onClick={() => setIsCartOpen(true)}
-                            className={`p-2 rounded-full transition-all relative ${isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'}`}
+                            className={`p-2 rounded-full transition-all relative ${isScrolled ? 'text-gray-800' : 'text-white'}`}
                         >
                             <ShoppingCart className="w-6 h-6" />
                             {items.length > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border border-white">
+                                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
                                     {items.length}
                                 </span>
                             )}
                         </button>
-                        <button onClick={() => setIsMenuOpen(true)} className={`p-2 rounded-lg transition-all hover:scale-110 ${isScrolled ? "hover:bg-gray-100" : "hover:bg-white/20"}`}>
-                            <Menu className={`h-6 w-6 ${isScrolled ? "text-gray-800" : "text-white"}`} strokeWidth={2} />
+                        <button onClick={() => setIsMenuOpen(true)} className={`p-2 rounded-full transition-all active:scale-95 ${isScrolled ? "bg-gray-100 text-gray-800" : "bg-white/20 text-white"}`}>
+                            <Menu className="h-6 w-6" strokeWidth={2.5} />
                         </button>
                     </div>
                 </nav>
@@ -166,38 +272,46 @@ const Navbar = () => {
 
             {/* MOBILE MENU */}
             <div className={`fixed inset-0 z-[100] lg:hidden transition-all duration-500 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
-                <div className={`absolute right-0 top-0 h-full w-80 bg-white/95 backdrop-blur-2xl shadow-2xl transition-transform duration-500 overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                    <div className="p-6">
-                        <button onClick={() => setIsMenuOpen(false)} className="ml-auto block p-2 hover:bg-gray-100 rounded-lg">
-                            <X className="w-6 h-6" strokeWidth={2} />
-                        </button>
-                        <nav className="mt-8 space-y-2">
+                {/* Backdrop */}
+                <div className="absolute inset-0 bg-gray-950/40 backdrop-blur-sm transition-opacity duration-500" onClick={() => setIsMenuOpen(false)} />
+
+                {/* Menu Panel */}
+                <div className={`absolute right-0 top-0 h-full w-[85vw] max-w-sm bg-white shadow-2xl transition-transform duration-500 overflow-y-auto ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                    <div className="p-6 flex flex-col h-full">
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                            <span className="font-black text-xl text-black tracking-tight">MENU</span>
+                            <button onClick={() => setIsMenuOpen(false)} className="p-2 bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-black rounded-full transition-colors">
+                                <X className="w-5 h-5" strokeWidth={2.5} />
+                            </button>
+                        </div>
+
+                        {/* Navigation Links */}
+                        <nav className="flex-1 space-y-2">
                             {navLinks.map((link, i) => {
                                 if (link.name === "Products") {
                                     return (
-                                        <div key={i}>
-                                            <button onClick={() => setShowProductsDropdown(!showProductsDropdown)} className={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-all hover:bg-blue-50 ${pathname.includes('/products') ? 'bg-blue-100 text-accent' : 'text-gray-800'}`}>
-                                                <span>Products</span>
-                                                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showProductsDropdown ? 'rotate-180' : ''}`} />
+                                        <div key={i} className="mb-2">
+                                            <button onClick={() => setShowProductsDropdown(!showProductsDropdown)} className={`w-full flex items-center justify-between px-4 py-4 rounded-2xl font-bold transition-all ${pathname.includes('/products') ? 'bg-blue-50 text-blue-600' : 'text-gray-800 hover:bg-gray-50'}`}>
+                                                <span className="text-lg">Products</span>
+                                                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showProductsDropdown ? 'rotate-180 text-blue-600' : 'text-gray-400'}`} />
                                             </button>
-                                            <div className={`overflow-hidden transition-all duration-300 ${showProductsDropdown ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                                                <div className="ml-4 mt-2 space-y-1 border-l-2 border-blue-200 pl-4">
-                                                    <Link href="/products/core-trays" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
-                                                        Core Trays and Boxes
-                                                    </Link>
-                                                    <Link href="/products/core-drilling-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
-                                                        Core Drilling System
-                                                    </Link>
-                                                    <Link href="/products/drill-rigs" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
-                                                        Drilling Rigs
-                                                    </Link>
-                                                    <Link href="/products/diamond-tungsten-tools" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
-                                                        Diamond and Carbide Tools
-                                                    </Link>
-                                                    <Link href="/products/dosing-skid-system" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-accent rounded-lg transition-colors">
-                                                        Dosing Skid System
-                                                    </Link>
+                                            <div className={`overflow-hidden transition-all duration-300 ${showProductsDropdown ? 'max-h-[500px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                                                <div className="ml-4 space-y-1 border-l-2 border-gray-100 pl-4 py-2">
+                                                    {productCategories.map((category, idx) => {
+                                                        const Icon = category.icon;
+                                                        return (
+                                                            <Link
+                                                                key={idx}
+                                                                href={category.path}
+                                                                onClick={() => setIsMenuOpen(false)}
+                                                                className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-colors group"
+                                                            >
+                                                                <Icon className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                                                                {category.name}
+                                                            </Link>
+                                                        );
+                                                    })}
                                                 </div>
                                             </div>
                                         </div>
@@ -205,15 +319,24 @@ const Navbar = () => {
                                 }
 
                                 return (
-                                    <Link key={i} href={link.path} onClick={() => setIsMenuOpen(false)} className={`block px-4 py-3 rounded-lg font-medium transition-all hover:bg-blue-50 ${pathname === link.path ? 'bg-blue-100 text-accent' : 'text-gray-800'}`}>
+                                    <Link
+                                        key={i}
+                                        href={link.path}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className={`block px-4 py-4 rounded-2xl font-bold text-lg transition-all ${pathname === link.path ? 'bg-blue-50 text-blue-600' : 'text-gray-800 hover:bg-gray-50'}`}
+                                    >
                                         {link.name}
                                     </Link>
                                 );
                             })}
                         </nav>
-                        <button onClick={() => { setIsMenuOpen(false); router.push("/contact"); }} className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-4 rounded-full font-semibold transition-all hover:shadow-xl">
-                            Request a Quote
-                        </button>
+
+                        {/* Mobile Bottom CTA */}
+                        <div className="pt-8 mt-auto border-t border-gray-100">
+                            <button onClick={() => { setIsMenuOpen(false); router.push("/contact"); }} className="w-full bg-black hover:bg-blue-600 text-white px-6 py-4 rounded-full font-bold text-lg transition-all shadow-xl hover:shadow-blue-500/30">
+                                Request a Quote
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

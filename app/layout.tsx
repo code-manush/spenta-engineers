@@ -108,31 +108,31 @@ export default function RootLayout({
 }>) {
 
   const localBusinessData = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Spenta Engineers",
-  url: "https://www.spentaengineers.com",
-  logo: "https://www.spentaengineers.com/logo.png",
-  image: "https://www.spentaengineers.com/logo.png",
-  description:
-    "Manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Vadodara-390024",
-    addressLocality: "Vadodara",
-    addressRegion: "Gujarat",
-    postalCode: "390024",
-    addressCountry: "IN",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91-9426753291",
-    contactType: "Customer Service",
-    email: "spentaeng@gmail.com",
-    areaServed: "Worldwide",
-    availableLanguage: ["English"],
-  },
-};
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Spenta Engineers",
+    url: "https://www.spentaengineers.com",
+    logo: "https://www.spentaengineers.com/logo.png",
+    image: "https://www.spentaengineers.com/logo.png",
+    description:
+      "Manufacturer of precision drilling tools including drill rods, core barrels, diamond tools, and accessories for mining, exploration, and geotechnical applications.",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Vadodara-390024",
+      addressLocality: "Vadodara",
+      addressRegion: "Gujarat",
+      postalCode: "390024",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+91-9426753291",
+      contactType: "Customer Service",
+      email: "spentaeng@gmail.com",
+      areaServed: "Worldwide",
+      availableLanguage: ["English"],
+    },
+  };
 
   return (
     <html lang="en">

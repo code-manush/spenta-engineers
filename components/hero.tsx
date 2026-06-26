@@ -114,23 +114,23 @@ export default function Hero() {
   }, []);
 
   return (
-    <section 
+    <section
       className="relative w-full h-screen overflow-hidden bg-black"
     >
       {/* Animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-purple-900/20 animate-gradient-shift z-[1] pointer-events-none" />
-      
+
       {/* Floating geometric shapes (Parallaxed to mouse) */}
       <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div 
+        <div
           className="absolute top-20 left-10 w-32 h-32 border-2 border-white/10 rounded-full animate-float transition-transform duration-700 ease-out"
           style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }}
         />
-        <div 
+        <div
           className="absolute bottom-40 right-20 w-24 h-24 border-2 border-blue-400/20 rotate-45 animate-float-delayed transition-transform duration-700 ease-out"
           style={{ transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)` }}
         />
-        <div 
+        <div
           className="absolute top-1/2 right-1/4 w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg animate-pulse-slow transition-transform duration-700 ease-out"
           style={{ transform: `translate(${mousePosition.x * 1.5}px, ${mousePosition.y * 1.5}px)` }}
         />
@@ -163,7 +163,7 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-10"
         >
           {/* Media Parallax wrapper */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 w-full h-full"
             style={{ x: mousePosition.x * -0.5, y: mousePosition.y * -0.5 }}
           >
@@ -195,7 +195,7 @@ export default function Hero() {
 
           {/* Slide Content */}
           <div className="relative z-20 flex items-center h-full px-6 md:px-12 pointer-events-none">
-            <motion.div 
+            <motion.div
               className="w-full md:w-1/2 text-white space-y-6 pointer-events-auto"
               initial="hidden"
               animate="visible"
@@ -207,7 +207,7 @@ export default function Hero() {
                 }
               }}
             >
-              <motion.p 
+              <motion.p
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -216,12 +216,12 @@ export default function Hero() {
               >
                 {slide.eyebrow}
               </motion.p>
-              
-              <motion.h1 
+
+              <motion.h1
                 className="text-4xl md:text-6xl font-bold leading-tight flex flex-wrap"
               >
                 {slide.headline.split(' ').map((word, i) => (
-                  <motion.span 
+                  <motion.span
                     key={i}
                     className="mr-3 mb-2"
                     variants={{
@@ -233,8 +233,8 @@ export default function Hero() {
                   </motion.span>
                 ))}
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -243,16 +243,16 @@ export default function Hero() {
               >
                 {slide.supporting}
               </motion.p>
-              
-              <motion.div 
+
+              <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
                 }}
                 className="flex gap-4 pt-4"
               >
-                <button 
-                  className="bg-accent hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50 relative overflow-hidden group" 
+                <button
+                  className="bg-accent hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50 relative overflow-hidden group"
                   onClick={() => window.location.href = '/products/core-trays'}
                 >
                   <span className="relative z-10">Explore Products</span>
@@ -268,8 +268,8 @@ export default function Hero() {
       {/* Progress Slide indicators */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 flex gap-4 w-full max-w-md px-6">
         {slides.map((_, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="h-[3px] flex-1 bg-white/20 overflow-hidden cursor-pointer rounded-full relative"
             onClick={() => {
               const dir = index > slideIndex ? 1 : -1;
@@ -277,7 +277,7 @@ export default function Hero() {
             }}
           >
             {index === slideIndex && (
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 h-full bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 animate={progressControls}
                 initial={{ width: "0%" }}

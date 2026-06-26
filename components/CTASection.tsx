@@ -1,157 +1,132 @@
 "use client";
 
-import { FileDown, Mail, ArrowRight, Phone } from 'lucide-react';
-import { useState, useEffect } from "react";
+import { FileDown, Mail, ArrowRight, Phone, CheckCircle2 } from 'lucide-react';
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function CTASection() {
-  const [particles, setParticles] = useState<Array<{left: string, top: string, animationDelay: string, animationDuration: string}>>([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setParticles([...Array(20)].map(() => ({
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 5}s`,
-        animationDuration: `${5 + Math.random() * 10}s`
-      })));
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <section className="relative py-24 bg-gradient-to-br from-black via-graphite to-black text-white overflow-hidden">
-      {/* Animated background effects */}
-      <div className="absolute inset-0">
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
-        
-        {/* Floating orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        
-        {/* Animated particles */}
-        {particles.map((style, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-float-particle"
-            style={style}
-          />
-        ))}
+    <section className="relative py-32 bg-gray-950 text-white overflow-hidden border-t-8 border-blue-600">
+      {/* Background pattern - Dark Mode Map */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.05]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="dot-pattern-dark-cta" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle fill="white" cx="2" cy="2" r="2"></circle>
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#dot-pattern-dark-cta)"></rect>
+        </svg>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      {/* Floating Orbs for depth */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] animate-float pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900/30 rounded-full blur-[100px] animate-float-delayed pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
         
         {/* Main content */}
-        <div className="text-center space-y-8 mb-12">
-
-
-          {/* Headline with gradient */}
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight animate-slide-up">
-            <span className="block mb-2">Ready to Source</span>
-            <span className="bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">
-              Quality Drilling Equipment?
+        <motion.div 
+          className="space-y-8 mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Headline */}
+          <h2 className="text-5xl md:text-7xl font-black leading-tight tracking-tight">
+            <span className="block text-white mb-2">READY TO SOURCE</span>
+            <span className="text-blue-500">
+              QUALITY EQUIPMENT?
             </span>
           </h2>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fade-in-delayed">
-            Contact us today to discuss your requirements and receive a customized quotation tailored to your project needs.
+          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Contact us today to discuss your requirements and receive a customized quotation tailored precisely to your project needs.
           </p>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap justify-center gap-8 pt-4 animate-fade-in-delayed" style={{ animationDelay: '400ms' }}>
+          <div className="flex flex-wrap justify-center gap-8 pt-6">
             {[
-              { icon: "✓", text: "15+ Years Experience" },
-              { icon: "⚡", text: "500+ Projects" },
-              { icon: "🏆", text: "Quality Assured" }
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-blue-200">
-                <span className="text-2xl">{item.icon}</span>
-                <span className="font-medium">{item.text}</span>
+              "15+ Years Experience",
+              "500+ Projects Supplied",
+              "100% Quality Assured"
+            ].map((text, i) => (
+              <div key={i} className="flex items-center gap-3 text-gray-300 font-medium">
+                <CheckCircle2 className="w-6 h-6 text-blue-500" />
+                <span className="text-lg">{text}</span>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-delayed" style={{ animationDelay: '600ms' }}>
-          
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           {/* Primary CTA - Download */}
           <a
             href="/spenta-engineers-catalogue.pdf"
             target="_blank"
-            className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-black to-blue-700 hover:from-graphite hover:to-blue-700 px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 overflow-hidden"
+            className="group relative inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-full font-bold text-lg shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(37,99,235,0.6)] overflow-hidden w-full sm:w-auto justify-center"
           >
             {/* Shine effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             
-            <FileDown className="w-6 h-6 group-hover:animate-bounce" strokeWidth={2} />
-            
+            <FileDown className="w-6 h-6 group-hover:-translate-y-1 transition-transform" strokeWidth={2.5} />
             <span className="relative z-10">Download Catalogue</span>
-            
-            {/* Animated border */}
-            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
-            </div>
           </a>
 
           {/* Secondary CTA - Contact */}
           <Link
             href="/contact"
-            className="group relative inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm hover:bg-white/20 border-2 border-white/30 hover:border-white/50 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105"
+            className="group relative inline-flex items-center gap-3 bg-transparent hover:bg-white/5 border-2 border-gray-600 hover:border-white text-white px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center"
           >
-            <Mail className="w-6 h-6 group-hover:rotate-12 transition-transform" strokeWidth={2} />
+            <Mail className="w-6 h-6 group-hover:rotate-12 transition-transform" strokeWidth={2.5} />
             <span>Contact Us</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
           </Link>
-        </div>
+        </motion.div>
 
         {/* Additional info */}
-        <div className="mt-12 text-center animate-fade-in-delayed" style={{ animationDelay: '800ms' }}>
-          <p className="text-blue-200 text-sm mb-4">
+        <motion.div 
+          className="mt-16 pt-12 border-t border-gray-800 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p className="text-gray-500 text-sm mb-4 uppercase tracking-widest font-semibold">
             Need immediate assistance? Call us directly
           </p>
           <a 
             href="tel:+919426753291" 
-            className="inline-flex items-center gap-2 text-2xl font-bold text-white hover:text-blue-300 transition-colors group"
+            className="inline-flex items-center gap-3 text-3xl md:text-4xl font-black text-white hover:text-blue-400 transition-colors group"
           >
-            <Phone className="w-6 h-6 group-hover:animate-bounce" strokeWidth={2} />
+            <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <Phone className="w-6 h-6 group-hover:animate-bounce" strokeWidth={2.5} />
+            </div>
             +91-9426753291
           </a>
-        </div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-10 left-10 w-20 h-20 border-2 border-white/20 rounded-full animate-spin-slow" />
-        <div className="absolute bottom-10 right-10 w-16 h-16 border-2 border-white/20 rotate-45 animate-pulse" />
+        </motion.div>
       </div>
 
       <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(-30px, -30px); }
         }
-        @keyframes slide-up {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes float-delayed {
+          0%, 100% { transform: translate(0, 0); }
+          50% { transform: translate(30px, 30px); }
         }
-        @keyframes float-particle {
-          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
-          50% { transform: translate(var(--tx, 20px), var(--ty, -40px)) scale(1.5); opacity: 1; }
-        }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-fade-in { animation: fade-in 0.8s ease-out; }
-        .animate-slide-up { animation: slide-up 0.8s ease-out; }
-        .animate-fade-in-delayed { animation: fade-in 0.8s ease-out both; }
-        .animate-float-particle { animation: float-particle 10s ease-in-out infinite; }
-        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-float { animation: float 10s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 12s ease-in-out infinite; }
       `}</style>
     </section>
   );

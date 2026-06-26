@@ -1,175 +1,84 @@
-import RequestQuoteModal from "@/app/products/RequestQuoteModal";
-import AddToCartButton from "@/components/products/AddToCartButton";
-import type { Metadata } from "next";
-import Image from "next/image";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Overshots & Drilling Accessories",
-  description:
-    "Drilling accessories including overshots, adapters, and core lifters supporting efficient drilling operations.",
-};
+import ProductHero from "@/components/products/ui/ProductHero";
+import ProductStickyScroll from "@/components/products/ui/ProductStickyScroll";
+import ProductVariantsCarousel from "@/components/products/ui/ProductVariantsCarousel";
+import ProductFeatures from "@/components/products/ui/ProductFeatures";
+import ProductCTA from "@/components/products/ui/ProductCTA";
+import { Link, Shield, Wrench, CheckCircle } from "lucide-react";
 
 export default function AccessoriesPage() {
-  return (
-    <section className="py-0 bg-white">
-      <div className="mx-auto px-0">
+    return (
+        <main className="bg-white dark:bg-gray-950 transition-colors duration-300">
+            <ProductHero
+                title="Overshots & Accessories"
+                description="Drilling accessories including overshots, adapters, and core lifters supporting efficient drilling operations."
+                breadcrumbs={[
+                    { label: "Home", href: "/" },
+                    { label: "Products", href: "/products" },
+                    { label: "Accessories", href: "/products/accessories" },
+                ]}
+            />
 
-        {/* Hero */}
-        <section
-          className="relative py-50 text-white bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/overshot.webp')",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/80"></div>
+            <ProductStickyScroll
+                image="/overshot.webp"
+                sections={[
+                    {
+                        title: "Essential Components",
+                        content: "Drilling accessories play a critical role in ensuring operational continuity, safety, and equipment compatibility during drilling activities."
+                    },
+                    {
+                        title: "Reliable Operations",
+                        content: "Our accessories are engineered for precise fitment, durability, and ease of use, helping reduce downtime and maintain drilling efficiency under challenging field conditions."
+                    }
+                ]}
+            />
 
-          <div className="relative max-w-7xl mx-auto px-6">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-normal">
-              Overshots & Drilling Accessories
-            </h1>
+            <ProductVariantsCarousel
+                title="Available Accessories"
+                description="Our accessory range supports standard wireline drilling systems and field requirements."
+                variants={[
+                    {
+                        title: "Overshots",
+                        description: "Used for retrieval of core barrels during wireline drilling operations.",
+                    },
+                    {
+                        title: "Couplings & Adapters",
+                        description: "Precision components ensuring secure connections between drilling tools.",
+                    },
+                    {
+                        title: "Core Lifters & Catchers",
+                        description: "Designed to retain core samples during recovery and minimize core loss.",
+                    }
+                ]}
+            />
 
-            <p className="text-xl text-gray-200 max-w-3xl leading-relaxed">
-              Spenta Engineers supplies a comprehensive range of drilling
-              accessories designed to support smooth, safe, and efficient
-              drilling operations across exploration and mining projects.
-            </p>
-          </div>
-        </section>
+            <ProductFeatures
+                title="Technical Highlights"
+                features={[
+                    {
+                        title: "Precision Machining",
+                        description: "Accurate fitment through rigorous precision machining.",
+                        icon: Wrench
+                    },
+                    {
+                        title: "Operational Safety",
+                        description: "Designed for repeated field use and improved operational safety.",
+                        icon: Shield
+                    },
+                    {
+                        title: "System Compatibility",
+                        description: "Compatibility with standard drilling systems and consistent quality inspection standards.",
+                        icon: Link
+                    }
+                ]}
+            />
 
-        {/* Engineering Overview */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Text */}
-            <div>
-              <h2 className="text-4xl font-bold text-graphite mb-6">
-                Essential Components for Reliable Drilling Operations
-              </h2>
-
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Drilling accessories play a critical role in ensuring operational
-                continuity, safety, and equipment compatibility during drilling
-                activities.
-              </p>
-
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Our accessories are engineered for precise fitment, durability,
-                and ease of use, helping reduce downtime and maintain drilling
-                efficiency under challenging field conditions.
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className="relative">
-              <Image
-                src="/accessories-detail.jpg"
-                alt="Drilling Accessories Components Detail"
-                width={600}
-                height={420}
-                className="w-full h-[420px] object-cover rounded-xl border border-gray-200 shadow-lg"
-              />
-            </div>
-
-          </div>
-        </section>
-
-        {/* Variants */}
-        <section className="py-24 bg-gray-100 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-6">
-
-            <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-graphite mb-4">
-                Available Accessories
-              </h2>
-              <p className="text-lg text-gray-600">
-                Our accessory range supports standard wireline drilling systems
-                and field requirements.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {[
-                {
-                  title: "Overshots",
-                  desc: "Used for retrieval of core barrels during wireline drilling operations.",
-                },
-                {
-                  title: "Couplings & Adapters",
-                  desc: "Precision components ensuring secure connections between drilling tools.",
-                },
-                {
-                  title: "Core Lifters & Catchers",
-                  desc: "Designed to retain core samples during recovery and minimize core loss.",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-10 rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all"
-                >
-                  <h3 className="text-2xl font-semibold text-graphite mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* Technical Highlights */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-
-            <div className="mb-16 max-w-3xl">
-              <h2 className="text-4xl font-bold text-graphite mb-4">
-                Technical Highlights
-              </h2>
-              <p className="text-lg text-gray-600">
-                Engineering features focused on reliability and system compatibility.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {[
-                "Precision machining for accurate fitment",
-                "High-strength materials for durability",
-                "Compatibility with standard drilling systems",
-                "Designed for repeated field use",
-                "Improved operational safety",
-                "Consistent quality inspection standards",
-              ].map((point, index) => (
-                <div
-                  key={index}
-                  className="flex items-start p-6 bg-gray-50 border border-gray-200 rounded-lg"
-                >
-                  <span className="text-blue-900 text-xl font-bold mr-4">✓</span>
-                  <p className="text-lg text-gray-700">{point}</p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-        </section>
-
-        {/* CTA */}
-        <div className="bg-graphite text-white rounded-xl p-12 text-center">
-          <h3 className="text-3xl font-bold mb-4">
-            Need Accessory Specifications or Compatibility Details?
-          </h3>
-          <p className="text-lg text-gray-300 mb-8">
-            Contact our team to confirm accessory selection and compatibility
-            with your drilling setup.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <RequestQuoteModal productName="Product" sizes={[]} />
-            <AddToCartButton productName="Product" />
-          </div>
-        </div>
-
-      </div>
-    </section>
-  );
+            <ProductCTA
+                title="Need Accessory Details?"
+                description="Contact our team to confirm accessory selection and compatibility with your drilling setup."
+                productName="Accessories"
+            />
+        </main>
+    );
 }
